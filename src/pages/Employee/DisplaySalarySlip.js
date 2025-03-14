@@ -1,13 +1,18 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import background from "../../images/undraw_post_gs8w.png";
-import './salarySlip.css';
+import background from "../../images/freepik__adjust__90339.png";
+import "../../App.css"; // Global styles
+import "./salarySlip.css"; // Page-specific styles
+
 
 function SalarySlip() {
   return (
-    <Layout backgroundImage={background}>
+    <Layout backgroundImage={background}> 
+    <div >
       <DisplaySalarySlips />
-    </Layout>
+    </div>
+  </Layout>
+  
   );
 }
 const DisplaySalarySlips = () => {

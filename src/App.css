@@ -51,7 +51,9 @@ body {
   
 }
 
-
+.content-container.dynamic-bg {
+  transition: background-image 0.5s ease-in-out;
+}
 /* Ensure content remains visible on top */
 .content-container > * {
   position: relative;

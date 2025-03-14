@@ -1,0 +1,93 @@
+.leave-request-container {
+    max-width: 400px;
+    margin:auto auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(162, 113, 113, 0.4);
+    background-color: #f9f9f9;
+    background:no-repeat center center/cover;
+    backdrop-filter: blur(8px);
+    color: #333;
+    
+
+  }
+
+  .content-container.dynamic-bg {
+    background-repeat: no-repeat;
+    margin-top: 0px;
+    margin-left:auto ;
+    background-position:  center;
+    background-size:100%;
+    background-blend-mode: multiply;
+    
+    
+  }
+  
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  input,
+  textarea {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+  }
+  select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    background-color: #d3bc77;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Hover effect */
+  select:hover {
+    border-color: #ffcc00;
+  }
+  
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+  
+  button {
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* transition: 0.3s ease; */
+  
+  }
+  
+  button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
