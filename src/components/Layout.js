@@ -2,11 +2,17 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import "../App.css";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, backgroundImage, className }) => {
+  const containerStyle = backgroundImage
+    ? { backgroundImage: `url(${backgroundImage})` }
+    : {};
+
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${className || ""}`}>
       <Sidebar />
-      <div className="content-container">{children}</div>
+      <div className={`content-container ${backgroundImage ? "dynamic-bg" : ""}`} style={containerStyle}>
+        {children}
+      </div>
     </div>
   );
 };
