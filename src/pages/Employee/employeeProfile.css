@@ -53,4 +53,29 @@
     background-color: #000;
     color: #fff;
   }
-  
+  label {
+    font-weight: bold;
+    margin-right: 10px; /* Space between label and input */
+    display: inline-block;
+    width: 120px; /* Consistent label width */
+    text-align: right;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.7);
+    color: #333;
+    padding: 2px 10px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    font-size: 14px;
+    height: 18px; /* Shorter height */
+}
+
+/* Adjust row spacing */
+.profile-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space between rows */
+}

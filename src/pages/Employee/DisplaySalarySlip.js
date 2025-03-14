@@ -26,7 +26,8 @@ const DisplaySalarySlips = () => {
       
       <div className="receipt-body">
         <div className="receipt-row">
-          <p><strong>Date:</strong> 28 August 2023</p>
+        <p><strong>Date:</strong> <input type="text" value="14-03-2024" name="leaveDate"/></p>
+
           <p><strong>Amount:</strong> $10,231</p>
         </div>
         <div className="receipt-row">
@@ -34,15 +35,15 @@ const DisplaySalarySlips = () => {
           <p><strong>Payment For:</strong> Monthly Salary</p>
         </div>
         <div className="receipt-row">
-          <p><strong>Account:</strong> 031928176183</p>
-          <p><strong>Generated On:</strong> 14 March 2024</p>
+          <p><strong>Account:</strong><input type="text" value="031928176183 " readonly/> </p>
+          <p><strong>Generated On:</strong><input type="text" value="14-03-2024" readonly/></p>
         </div>
         <div className="receipt-row">
-          <p><strong>Deductions:</strong> 1000</p>
+          <p><strong>Deductions:</strong> <input type="text" value="1000" readonly></input></p>
           <p><strong>Tax Rate:</strong> 5%</p>
         </div>
         <div className="receipt-row">
-          <p><strong>Leaves:</strong> 10</p>
+          <p><strong>Leaves:</strong><input type="text" value="10" readonly/></p>
           
         </div>
         <div className="receipt-row">

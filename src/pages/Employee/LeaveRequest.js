@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import background from "../../images/leavreq.jpeg";
 import "../../App.css"; // Global styles
-
 import "./LeaveRequest.css";
 
-function SalarySlip() {
+function LeaveRequest() {
     return (
       <Layout backgroundImage={background}> 
       <div >
@@ -79,4 +78,4 @@ const LeaveRequestForm = () => {
   );
 };
 
-export default SalarySlip;
+export default LeaveRequest;
