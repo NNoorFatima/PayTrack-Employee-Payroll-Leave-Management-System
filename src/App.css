@@ -119,8 +119,8 @@
   font-size: 16px;
 }
 
-.dashboard-box .add-btn {
-  background: #28a745;
+.dashboard-box .add-btn,.remove-btn {
+  background: #0059b3;
   color: white;
   padding: 10px;
   border: none;
@@ -129,6 +129,8 @@
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
+
+
 
 .dashboard-box .add-btn:hover {
   background: #218838;
