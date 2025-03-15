@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminDashboard from "./Admin"; // ✅ Set as the default landing page
+import AddHr from "./AddHr";
+import AddManager from "./AddManager";
+import RemoveHr from "./RemoveHR";
+import RemoveManager from "./RemoveManager";
+import AdminLogin from "./AdminLogin";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AdminDashboard />} /> {/* ✅ Default page is now Admin.js */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/add-hr" element={<AddHr />} />
+        <Route path="/add-manager" element={<AddManager />} />
+        <Route path="/remove-hr" element={<RemoveHr />} />
+        <Route path="/remove-manager" element={<RemoveManager />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+      </Routes>
+    </Router>
   );
 }
 
