@@ -10,11 +10,42 @@ const AddManager = ({ setView }) => {
   const [address, setAddress] = useState("");
   const [dateOfJoin, setDateOfJoin] = useState("");
 
-  // Restrict past dates
   const today = new Date().toISOString().split("T")[0];
+
+  // Format phone number (XXXX-XXXXXXX)
+  const formatPhoneNumber = (value) => {
+    let cleaned = value.replace(/\D/g, "");
+    if (cleaned.length > 11) cleaned = cleaned.slice(0, 11);
+
+    return cleaned.length >= 4 ? cleaned.slice(0, 4) + "-" + cleaned.slice(4) : cleaned;
+  };
+
+  // Validate email (@gmail.com required)
+  const validateEmail = (email) => /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+
+  // Validate address (10+ characters, mix of letters and numbers)
+  const validateAddress = (address) => {
+    return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\s,.-]{10,}$/.test(address);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      alert("Email must be in format: abc@gmail.com");
+      return;
+    }
+
+    if (phoneNo.length !== 12) {
+      alert("Phone number must be in format XXXX-XXXXXXX (11 digits)");
+      return;
+    }
+
+    if (!validateAddress(address)) {
+      alert("Address must be at least 10 characters long and contain both letters and numbers.");
+      return;
+    }
+
     console.log("Manager Added:", { name, password, gender, email, phoneNo, address, dateOfJoin });
   };
 
@@ -34,12 +65,33 @@ const AddManager = ({ setView }) => {
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
-          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            placeholder="abc@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+            title="Email must be in format: abc@gmail.com"
+            required
+          />
         </div>
 
         <div className="form-row">
-          <input type="tel" placeholder="Phone Number" value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} required />
-          <textarea placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
+          <input
+            type="tel"
+            placeholder="03XX-XXXXXXX"
+            value={phoneNo}
+            onChange={(e) => setPhoneNo(formatPhoneNumber(e.target.value))}
+            pattern="\d{4}-\d{7}"
+            title="Phone number must be in format XXXX-XXXXXXX"
+            required
+          />
+          <textarea
+            placeholder="Enter Address (10+ chars, must include letters & numbers)"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
         </div>
 
         <div className="form-row">
