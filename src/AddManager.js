@@ -9,21 +9,14 @@ const AddManager = ({ setView }) => {
   const [phoneNo, setPhoneNo] = useState("");
   const [address, setAddress] = useState("");
   const [dateOfJoin, setDateOfJoin] = useState("");
-  const [departmentId, setDepartmentId] = useState("");
 
   const today = new Date().toISOString().split("T")[0];
-
-  const departments = [
-    { id: 1, name: "HR" },
-    { id: 2, name: "Finance" },
-    { id: 3, name: "IT" },
-    { id: 4, name: "Marketing" }
-  ];
 
   // Format phone number (XXXX-XXXXXXX)
   const formatPhoneNumber = (value) => {
     let cleaned = value.replace(/\D/g, "");
     if (cleaned.length > 11) cleaned = cleaned.slice(0, 11);
+
     return cleaned.length >= 4 ? cleaned.slice(0, 4) + "-" + cleaned.slice(4) : cleaned;
   };
 
@@ -53,12 +46,7 @@ const AddManager = ({ setView }) => {
       return;
     }
 
-    if (!departmentId) {
-      alert("Please select a department.");
-      return;
-    }
-
-    console.log("Manager Added:", { name, password, gender, email, phoneNo, address, dateOfJoin, departmentId });
+    console.log("Manager Added:", { name, password, gender, email, phoneNo, address, dateOfJoin });
   };
 
   return (
@@ -108,12 +96,6 @@ const AddManager = ({ setView }) => {
 
         <div className="form-row">
           <input type="date" value={dateOfJoin} onChange={(e) => setDateOfJoin(e.target.value)} min={today} required />
-          <select value={departmentId} onChange={(e) => setDepartmentId(e.target.value)} required>
-            <option value="">Select Department</option>
-            {departments.map((dept) => (
-              <option key={dept.id} value={dept.id}>{dept.name}</option>
-            ))}
-          </select>
         </div>
 
         <button type="submit" className="add-btn">Add Manager</button>

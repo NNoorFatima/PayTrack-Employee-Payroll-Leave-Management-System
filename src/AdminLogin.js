@@ -47,7 +47,13 @@ const Login = () => {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#">Forget password?</a>
+            <button 
+  onClick={() => alert("Forgot password functionality not implemented yet!")} 
+  className="link-button"
+>
+  Forget password?
+</button>
+
           </div>
           <button type="submit" className="login-btn">Login</button>
         </form>
