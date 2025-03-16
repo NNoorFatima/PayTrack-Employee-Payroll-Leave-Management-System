@@ -7,7 +7,7 @@ import RemoveManager from "./RemoveManager";
 import "./App.css";
 
 const AdminDashboard = () => {
-  const [view, setView] = useState("dashboard"); // ✅ Track the current section
+  const [view, setView] = useState("dashboard"); 
 
   return (
     <div className="dashboard-container">
