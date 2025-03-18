@@ -15,8 +15,8 @@ const ManagerLayout = ({ children }) => {
         {/* Top Navigation */}
         <header className="top-nav">
           <div className="nav-left">
-            <h2 className="sidebar-title">Manager Panel</h2> 
-            
+            {/* <h2 className="sidebar-title">Manager Panel</h2>  */}
+            {/* <h2 >Manager Panel</h2>  */}
           </div>
           <div className="nav-right">
             <a href="#" className="nav-link">Profile</a>

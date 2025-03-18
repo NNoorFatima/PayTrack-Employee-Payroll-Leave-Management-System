@@ -38,7 +38,6 @@
 /* Sidebar */
 .sidebar {
     width: 180px;
-    margin-top: 20px;
     height: 93.80%;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
@@ -76,9 +75,9 @@
 
 /* Change color to yellow on hover */
 .sidebar ul li button:hover {
-    background-color: rgb(255, 221, 0); /* Yellow background on hover */
+    background-color: rgb(238, 190, 2); /* Yellow background on hover */
     color: black; /* Change text color to black on hover */
-    border-color:rgb(255, 221, 0); /* Yellow border on hover */
+    border-color: rgb(238, 190, 2); /* Yellow border on hover */
 }
 
 
@@ -133,11 +132,11 @@
     letter-spacing: 1px;
 }
 
-
+/* 
 .nav-left h2 {
     margin: 0;
-    font-size: 1.5rem;
-  }
+    font-size: 0.5rem;
+  } */
 
 
 

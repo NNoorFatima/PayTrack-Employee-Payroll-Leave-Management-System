@@ -8,7 +8,7 @@ const ManagerSidebar = ({ setView }) => {
   return (
     
     <aside className="sidebar">
-      {/* <h2>Manager Panel</h2>     */}
+      <h2 className="nav-left">Manager Panel</h2>    
       <ul>
         <li><button onClick={() => setView("home")}>🏠 Home</button></li>
         <li><button onClick={() => setView("leave-requests")}>📝 Leave Requests</button></li>
