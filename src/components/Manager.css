@@ -70,6 +70,7 @@
     background-color: transparent; /* Transparent background */
     color: white; /* White text */
     transition: all 0.3s ease;
+    text-align: left;
     margin-bottom: 15px; /* Add space between buttons */
 }
 

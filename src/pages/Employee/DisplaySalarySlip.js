@@ -1,23 +1,11 @@
-import React from "react";
-import Layout from "../../components/Layout";
-import background from "../../images/freepik__adjust__90339.png";
-import "../../App.css"; // Global styles
+import React, { useState } from "react";
 import "./salarySlip.css"; // Page-specific styles
+import EmployeeLayout from "../../components/EmployeeLayout";
 
 
-function SalarySlip() {
-  return (
-    <Layout backgroundImage={background}> 
-    <div >
-      <DisplaySalarySlips />
-    </div>
-  </Layout>
-  
-  );
-}
 const DisplaySalarySlips = () => {
   return (
-    
+    <EmployeeLayout>
     <div className="salary-details">
       <div className="receipt-header">
         <h1>RECEIPT No.</h1>
@@ -51,9 +39,9 @@ const DisplaySalarySlips = () => {
         </div>
       </div>
     </div>
-    
+    </EmployeeLayout>
   
   );
 };
 
-export default SalarySlip;
+export default DisplaySalarySlips;

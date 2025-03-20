@@ -1,81 +1,79 @@
-/* Employee Profile Styling */
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    max-width: 500px;
-    margin: auto;
-    margin-top: 30px;
-    gap: 15px;
-  }
-  
-  /* Profile Picture */
-  .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #1a1a2e;
-  }
-  
-  /* Employee Info Styling */
-  .profile-info {
-    text-align: center;
-  }
-  
-  .profile-info h2 {
-    font-size: 1.8rem;
-    color: #1a1a2e;
-  }
-  
-  .profile-info p {
-    color: #555;
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-  
-  /* Action Button Styling */
-  .profile-action-btn {
-    background-color: #ffcc00;
-    color: #000;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s ease;
-  }
-  
-  .profile-action-btn:hover {
-    background-color: #000;
-    color: #fff;
-  }
-  label {
-    font-weight: bold;
-    margin-right: 10px; /* Space between label and input */
-    display: inline-block;
-    width: 120px; /* Consistent label width */
-    text-align: right;
+/* Full-screen background */
+.dashboard-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background: url("../../images/leavreq.jpeg") no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.dashboard-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-input {
-    background: rgba(255, 255, 255, 0.7);
-    color: #333;
-    padding: 2px 10px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: 0.3s ease;
-    font-size: 14px;
-    height: 18px; /* Shorter height */
+/* The frosted-glass panel that contains everything */
+.glass-panel {
+  height: 90vh;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  padding: 10px;
 }
 
-/* Adjust row spacing */
-.profile-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px; /* Space between rows */
+/* Sidebar + Main Content Layout */
+.dashboard-body {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+/* Top navigation bar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px 15px 0 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Main content */
+.main-area {
+  flex: 1;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 0 15px 0;
+}
+
+/* Dashboard content */
+.content-section {
+  max-width: 600px;
+  text-align: center;
+  margin: auto;
+}
+
+.content-section h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-left: 10rem;
+}
+
+.content-section p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e0e0e0;
 }
