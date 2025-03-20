@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
-import background from "../../images/aboutUs.jpg"; // Example background image
-import "../../App.css"; // Global styles
 import "./Add.css"; // Page-specific styles
 
 function AddManager() {
   return (
-    <AdminLayout backgroundImage={background}>
+    <AdminLayout>
       <div>
         <ManagerForm />
       </div>

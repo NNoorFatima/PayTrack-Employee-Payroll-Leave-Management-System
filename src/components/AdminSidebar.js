@@ -1,39 +1,27 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./Admin.css"; 
+import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import './EmployeeSidebar.css'; // Sidebar styling
 
-const AdminSidebar = ({ setView }) => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    navigate("/");
-  };
+const Sidebar = () => {
+  const navigate = useNavigate(); // Initialize navigate function
 
   return (
-    <div className="admin-sidebar">
-      <h2>Admin Panel</h2>
+    <aside className="sidebar">
+      <h2 className="nav-left">Admin Panel</h2>
       <ul>
-        <li>
-          <button onClick={() => setView("dashboard")}>About Us</button>
-        </li>
-        <li>
-          <button onClick={() => setView("add-hr")}>Add HR</button>
-        </li>
-        <li>
-          <button onClick={() => setView("add-manager")}>Add Manager</button>
-        </li>
-        <li>
-          <button onClick={() => setView("remove-hr")}>Remove HR</button>
-        </li>
-        <li>
-          <button onClick={() => setView("remove-manager")}>Remove Manager</button>
-        </li>
-        <li>
-          <button onClick={handleLogout}>Logout</button>
-        </li>
+        {/* Clicking the button will navigate to the respective page */}
+        <li><button onClick={() => navigate("/about-is")}>🏠 About Us</button></li>
+        <li><button onClick={() => navigate("/remove-hr")}>Remove HR</button></li>
+        <li><button onClick={() => navigate("/remove-manager")}>💼 Remove Manager</button></li>
+        <li><button onClick={() => navigate("/add-hr")}>Add HR</button></li>
+        <li><button onClick={() => navigate("/add-manager")}>💼 Add Manager</button></li>
+        {/* Uncomment for Logout functionality if needed */}
+        {/* <li style={{ marginTop: "auto" }}>
+          <button className="logout-btn" onClick={() => navigate("/LoginForm")}>Logout</button>
+        </li> */}
       </ul>
-    </div>
+    </aside>
   );
 };
 
-export default AdminSidebar;
+export default Sidebar;
