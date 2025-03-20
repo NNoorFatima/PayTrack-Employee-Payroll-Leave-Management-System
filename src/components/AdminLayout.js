@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "./AdminSidebar"; // Import the Sidebar for Employee
 import "./Admin.css"; // Import your custom CSS styles for Employee
 import backgroundImg from "../images/leavreq.jpeg"; // Import background image
@@ -19,7 +20,7 @@ const AdminLayout = ({ children }) => {
           </div>
           <div className="nav-right">
             <a href="#" className="nav-link">Profile</a>
-            <a href="#" className="nav-link logout-btn">Logout</a>
+            <Link to="/LoginAdmin" className="nav-link logout-btn">Logout</Link>
           </div>
         </header>
 

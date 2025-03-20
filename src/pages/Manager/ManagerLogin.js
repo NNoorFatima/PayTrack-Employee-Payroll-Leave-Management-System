@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import "./LoginForm.css"; // Updated CSS for the frosted-glass effect
 
+
 const ManagerLogin = () => {
   const navigate = useNavigate();
 

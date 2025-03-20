@@ -31,7 +31,7 @@ const AppRoutes = () => {
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
-      <Route path="/admin-login" element={<AdminLogin />} />
+      <Route path="/loginAdmin" element={<AdminLogin />} />
 
       {/* <Route path="/" element={<Dashboard />} /> */}
       {/* <Route path="/" element={<ManagerLogin />} /> */}

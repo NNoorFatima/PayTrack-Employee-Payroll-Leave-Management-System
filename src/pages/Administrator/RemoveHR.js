@@ -1,6 +1,6 @@
 import React from "react";
 import AdminLayout from "../../components/AdminLayout";
-import "./Add.css"; // Page-specific styles
+import "./remove.css"; // Page-specific styles
 
 function RemoveHR() {
   return (
@@ -14,7 +14,7 @@ function RemoveHR() {
 
 const RemoveHRForm = () => {
   return (
-    <div className="admin-form-container">
+    <div className="admin-form-container1">
       <div className="form-header">
         <h1>Remove HR Personnel</h1>
         <h2>Select HR to Remove</h2>

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import background from "../../images/aboutUs.jpg"; // Example background image
-import "./Add.css"; // Page-specific styles
+import "./addHR.css"; // Page-specific styles
 
 function AddHR() {
   return (
-    <AdminLayout backgroundImage={background}>
-      <div>
+    <AdminLayout>
+      <div> {/* Adjusted class */}
         <HRForm />
       </div>
     </AdminLayout>
@@ -28,7 +28,6 @@ const HRForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({ ...formData, [name]: value });
   };
 
@@ -76,33 +75,111 @@ const HRForm = () => {
   };
 
   return (
-    <div className="admin-form-container">
-      <div className="form-header">
-        <h1>Add HR Personnel</h1>
-        <h2>Fill in the details below</h2>
-      </div>
+    <div className="admin-form-container1"> {/* Adjusted class */}
 
       <form className="admin-form-body" onSubmit={handleSubmit}>
-        <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
+      <h2>Fill in the details below</h2>
+        <div className="form-row">
+          <div className="form-column">
+            <label htmlFor="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+          <div className="form-column">
+            <label htmlFor="gender">Gender</label>
+            <select
+              name="gender"
+              id="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
 
-        <select name="gender" value={formData.gender} onChange={handleChange} required>
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
+        <div className="form-row">
+          <div className="form-column">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+          <div className="form-column">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
 
-        <input type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required />
+        <div className="form-row">
+          <div className="form-column">
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <textarea name="address" placeholder="House #123, Street 4, New York, 10001" value={formData.address} onChange={handleChange} required />
+          <div className="form-column">
+            <label htmlFor="dateOfJoining">Date of Joining</label>
+            <input
+              type="date"
+              id="dateOfJoining"
+              name="dateOfJoining"
+              value={formData.dateOfJoining}
+              onChange={handleChange}
+              min={today}
+              required
+            />
+          </div>
+        </div>
 
-        <input type="date" name="dateOfJoining" value={formData.dateOfJoining} onChange={handleChange} min={today} required />
-
-        <button type="submit" className="submit-btn">Add HR</button>
+        <div className="form-row">
+          <div className="form-column full-width">
+            <label htmlFor="address">Address</label>
+            <textarea
+              id="address"
+              name="address"
+              placeholder="House #123, Street 4, New York, 10001"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <button type="submit" >Add HR</button>
       </form>
     </div>
   );
