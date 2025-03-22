@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/AdminLayout";
 import "./remove.css"; // Page-specific styles
 
@@ -13,6 +13,42 @@ function RemoveHR() {
 }
 
 const RemoveHRForm = () => {
+  const [hrList, setHrList] = useState([]);
+  const [selectedHR, setSelectedHR] = useState("");
+
+  // Fetch HR data from backend
+  useEffect(() => {
+    fetch("http://localhost:8080/hrs")
+      .then((response) => response.json())
+      .then((data) => {
+        setHrList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching HRs:", error);
+      });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (selectedHR) {
+      // Here you can trigger a DELETE request to your backend
+      fetch(`http://localhost:8080/hrs/deleteHRWithUser/${selectedHR}`, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          if (res.ok) {
+            alert("HR removed successfully");
+            // Optionally refetch HR list
+            setHrList((prev) => prev.filter((hr) => hr.userid !== parseInt(selectedHR)));
+            setSelectedHR("");
+          } else {
+            alert("Failed to remove HR");
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
   return (
     <div className="admin-form-container1">
       <div className="form-header">
@@ -20,14 +56,23 @@ const RemoveHRForm = () => {
         <h2>Select HR to Remove</h2>
       </div>
 
-      <form className="admin-form-body">
-        <select required>
+      <form className="admin-form-body" onSubmit={handleSubmit}>
+        <select
+          value={selectedHR}
+          onChange={(e) => setSelectedHR(e.target.value)}
+          required
+        >
           <option value="">Select HR ID</option>
-          <option value="22i-1036Doe">22i-1036</option>
-          <option value="22i-0846">22i-0846</option>
+          {hrList.map((hr) => (
+            <option key={hr.userid} value={hr.userid}>
+              {hr.userid}
+            </option>
+          ))}
         </select>
 
-        <button type="submit" className="submit-btn">Remove HR</button>
+        <button type="submit" className="submit-btn">
+          Remove HR
+        </button>
       </form>
     </div>
   );

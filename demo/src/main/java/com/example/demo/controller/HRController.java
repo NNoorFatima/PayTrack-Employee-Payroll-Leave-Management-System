@@ -71,4 +71,14 @@ public class HRController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/deleteHRWithUser/{id}")
+    public ResponseEntity<Void> deleteHRWithUser(@PathVariable int id) {
+        boolean deleted = hrService.deleteHRWithUser(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
