@@ -20,21 +20,21 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* <Route path="/" element={<EmployeeDashboard />} /> */}
-      <Route path="/profile" element={<EmployeeProfile />} />
+      <Route path="/" element={<EmployeeProfile />} />
       <Route path="/payslip" element={<DisplaySalarySlip />} />
       <Route path="/leave-request" element={<MakeLeaveRequest />} />
 
 
       {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}
-      <Route path="/" element={<AdminDashboard />} />
+      <Route path="/about-us" element={<AdminDashboard />} />
       <Route path="/add-hr" element={<AddHr />} />
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
       <Route path="/loginAdmin" element={<AdminLogin />} />
 
-      {/* <Route path="/" element={<Dashboard />} /> */}
-      {/* <Route path="/" element={<ManagerLogin />} /> */}
+      {/* <Route path="/" element={<Dashboard />} />  */}
+       {/* <Route path="/" element={<ManagerLogin />} /> */}
     </Routes>
   );
 };

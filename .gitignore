@@ -21,38 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/*Sara */
-/* App.css */
 
-/* Apply styles to the entire page */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+# Cache
+.cache/
+eslintcache
+*.cache
 
-/* Center content in the div */
-div {
-  text-align: center;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+# Editor/IDE files (if you switch editors)
+.vscode/
+.idea/
+*.iml
 
-/* Style for the heading */
-h1 {
-  color: #333;
-}
-
-/* Style for the paragraph */
-p {
-  font-size: 18px;
-  color: #666;
-}
-
+# OS-specific files (Windows)
+Thumbs.db

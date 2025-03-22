@@ -1,18 +1,12 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "pwa-node",
-        "request": "launch",
-        "name": "Launch React App",
-        "runtimeExecutable": "npm",
-        "runtimeArgs": [
-          "start"
-        ],
-        "port": 9229,
-        "skipFiles": ["<node_internals>/**"],
-        "outFiles": ["${workspaceFolder}/build/**/*.js"]
-      }
-    ]
-  }
-  
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "msedge",
+      "request": "launch",
+      "name": "Launch Edge against localhost",
+      "url": "http://localhost:3000",
+      "webRoot": "D:\\paytrack"
+    }
+  ]
+}
