@@ -1,15 +1,18 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "departments")
+@Table(name = "department")
 public class Department {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "deptid") // Assuming your column name in the DB is deptid
     private int id;
 
@@ -33,3 +36,6 @@ public class Department {
         this.name = name;
     }
 }
+
+
+
