@@ -3,16 +3,15 @@ package com.example.demo.controller;
 import com.example.demo.model.Manager;
 import com.example.demo.model.User;
 import com.example.demo.service.ManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.example.demo.service.UserService;
 
-import java.util.List;
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/managers")
 public class ManagerController {
@@ -22,54 +21,62 @@ public class ManagerController {
     @Autowired
     private UserService userService;
 
-    // GET /managers - Retrieve all managers
+    // GET /managers - Retrieve all managers (user data not included)
     @GetMapping
-    public ResponseEntity<List<Manager>> getAllManagers() {
-        List<Manager> managers = managerService.getAllManagers();
-        return ResponseEntity.ok(managers);
+    public List<Manager> getAllManagers() {
+        return managerService.getAllManagers();
     }
 
     // GET /managers/{id} - Retrieve a manager by userid
     @GetMapping("/{id}")
     public ResponseEntity<Manager> getManagerById(@PathVariable int id) {
-        Optional<Manager> managerOpt = managerService.getManagerById(id);
-        return managerOpt.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        Manager manager = managerService.getManagerById(id);
+        if (manager != null) {
+            return ResponseEntity.ok(manager);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    // GET /managers/{id}/user - Retrieve the user data for a given manager
+    // GET /managers/{id}/user - Retrieve user data linked to the manager
     @GetMapping("/{id}/user")
     public ResponseEntity<User> getManagerUser(@PathVariable int id) {
-        Optional<Manager> managerOpt = managerService.getManagerById(id);
-        if (managerOpt.isPresent() && managerOpt.get().getUser() != null) {
-            return ResponseEntity.ok(managerOpt.get().getUser());
+        Manager manager = managerService.getManagerById(id);
+        if (manager != null && manager.getUser() != null) {
+            return ResponseEntity.ok(manager.getUser());
         }
         return ResponseEntity.notFound().build();
     }
 
     // POST /managers - Create a new manager
+    // POST /managers - Create a new manager (link to existing user)
     @PostMapping
-    public ResponseEntity<Manager> createManager(@RequestBody Manager manager) {
-        Integer userId = manager.getUser().getUserid();
-        if (userService.getUserById(userId) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<String> createManager(@RequestBody Manager manager) {
+        int userId = manager.getUserid();
+
+        // ✅ Use userService to fetch the user
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            return ResponseEntity.badRequest().body("User not found for ID: " + userId);
         }
 
-        manager.setUserid(userId); // ✅ Make sure userid field is populated!
+        // Link manager to user object before saving
+        manager.setUser(user);
 
-        Manager createdManager = managerService.createManager(manager);
-        return new ResponseEntity<>(createdManager, HttpStatus.CREATED);
+        managerService.createManager(manager);
+        return ResponseEntity.ok("Manager added successfully!");
     }
 
-    // PUT /managers/{id} - Update an existing manager
+    // PUT /managers/{id} - Update manager
     @PutMapping("/{id}")
     public ResponseEntity<Manager> updateManager(@PathVariable int id, @RequestBody Manager managerDetails) {
-        Optional<Manager> updatedManager = managerService.updateManager(id, managerDetails);
-        return updatedManager.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        Manager updatedManager = managerService.updateManager(id, managerDetails);
+        if (updatedManager != null) {
+            return ResponseEntity.ok(updatedManager);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    // DELETE /managers/{id} - Delete a manager by userid
+    // DELETE /managers/{id} - Delete only from manager table
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteManager(@PathVariable int id) {
         boolean deleted = managerService.deleteManager(id);
@@ -78,4 +85,16 @@ public class ManagerController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    // DELETE /managers/deleteManagerWithUser/{id} - Delete from manager & user
+    // tables
+    @DeleteMapping("/deleteManagerWithUser/{id}")
+    public ResponseEntity<Void> deleteManagerWithUser(@PathVariable int id) {
+        boolean deleted = managerService.deleteManagerWithUser(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }

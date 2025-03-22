@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AdminLayout from "../../components/AdminLayout";
-import "./remove.css"; // Page-specific styles
+import axios from "axios";
+import "./remove.css"; 
 
 function RemoveManager() {
   return (
@@ -13,6 +14,52 @@ function RemoveManager() {
 }
 
 const RemoveManagerForm = () => {
+  const [managers, setManagers] = useState([]);
+  const [selectedManager, setSelectedManager] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  // Fetch manager list
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/managers")
+      .then((response) => {
+        setManagers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching managers:", error);
+      });
+  }, []);
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    if (!selectedManager) {
+      setMessage("Please select a Manager ID to delete.");
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+      // Step 1: Delete from manager table
+      await axios.delete(`http://localhost:8080/managers/${selectedManager}`);
+
+      // Step 2: Delete from user table
+      await axios.delete(`http://localhost:8080/users/${selectedManager}`);
+
+      setMessage("Manager and associated User successfully removed.");
+      // Refresh list after delete
+      setManagers(managers.filter((m) => m.userid !== parseInt(selectedManager)));
+      setSelectedManager("");
+    } catch (error) {
+      console.error("Error deleting manager/user:", error);
+      setMessage("Error occurred during deletion.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="admin-form-container1">
       <div className="form-header">
@@ -20,14 +67,24 @@ const RemoveManagerForm = () => {
         <h2>Select Manager to Remove</h2>
       </div>
 
-      <form className="admin-form-body">
-        <select required>
-          <option value="">Select Manager ID</option>
-          <option value="22i-1036Doe">22i-1036</option>
-          <option value="22i-0846">22i-0846</option>
-        </select>
+      <form className="admin-form-body" onSubmit={handleDelete}>
+      <select
+  value={selectedManager}
+  onChange={(e) => setSelectedManager(e.target.value)}
+  required
+>
+  <option value="">Select Manager ID</option>
+  {managers.map((m) => (
+    <option key={m.userid} value={m.userid}>
+      {m.userid}
+    </option>
+  ))}
+</select>
 
-        <button type="submit" className="submit-btn">Remove HR</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? "Removing..." : "Remove Manager"}
+        </button>
+        {message && <p className="status-message">{message}</p>}
       </form>
     </div>
   );

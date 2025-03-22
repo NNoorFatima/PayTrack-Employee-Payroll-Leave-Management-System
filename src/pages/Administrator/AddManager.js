@@ -75,7 +75,7 @@ const ManagerForm = () => {
   
       // Step 2: Create Manager using returned userId
       const managerPayload = {
-        user: { userid: userId },
+        userid: userId,  // ✅ direct userid now!
         deptid: formData.deptId,
       };
       await axios.post("http://localhost:8080/managers", managerPayload);

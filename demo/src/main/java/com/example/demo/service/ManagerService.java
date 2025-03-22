@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ManagerService {
@@ -15,30 +14,51 @@ public class ManagerService {
     @Autowired
     private ManagerRepository managerRepository;
 
+    @Autowired
+    private UserService userService;
+
+    // Retrieve all manager records
     public List<Manager> getAllManagers() {
         return managerRepository.findAll();
     }
 
-    public Optional<Manager> getManagerById(int userid) {
-        return managerRepository.findById(userid);
+    // Retrieve a manager record by userid
+    public Manager getManagerById(int userid) {
+        return managerRepository.findById(userid).orElse(null);
     }
 
+    // Create a new manager record
     public Manager createManager(Manager manager) {
         return managerRepository.save(manager);
     }
 
-    @Transactional
-    public Optional<Manager> updateManager(int userid, Manager managerDetails) {
-        return managerRepository.findById(userid).map(existingManager -> {
+    // Update manager (only deptid is updatable)
+    public Manager updateManager(int userid, Manager managerDetails) {
+        Manager existingManager = managerRepository.findById(userid).orElse(null);
+        if (existingManager != null) {
             existingManager.setDeptid(managerDetails.getDeptid());
             return managerRepository.save(existingManager);
-        });
+        }
+        return null;
     }
 
-    @Transactional
+    // Only deletes the manager record
     public boolean deleteManager(int userid) {
         if (managerRepository.existsById(userid)) {
             managerRepository.deleteById(userid);
+            return true;
+        }
+        return false;
+    }
+
+    // Deletes both manager and corresponding user
+    @Transactional
+    public boolean deleteManagerWithUser(int userid) {
+        Manager manager = managerRepository.findById(userid).orElse(null);
+        if (manager != null) {
+            int userId = manager.getUser().getUserid();
+            managerRepository.deleteById(userid);
+            userService.deleteUser(userId);
             return true;
         }
         return false;
