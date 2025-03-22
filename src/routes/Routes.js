@@ -30,8 +30,8 @@ const AppRoutes = () => {
       <Route path="/about-us" element={<AdminDashboard />} />
 
       <Route path="/add-hr" element={<AddHr />} />
-      <Route path="/add-manager" element={<AddManager />} />
-      <Route path="/" element={<RemoveHr />} />
+      <Route path="/" element={<AddManager />} />
+      <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
       <Route path="/loginAdmin" element={<AdminLogin />} />
 

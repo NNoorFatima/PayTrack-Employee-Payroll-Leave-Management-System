@@ -5,9 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "manager")
@@ -15,16 +14,14 @@ public class Manager {
 
     @Id
     @Column(name = "userid")
-    private int userid;
+    private Integer userid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid", referencedColumnName = "userid", insertable = false, updatable = false)
+    private User user;
 
     @Column(name = "deptid", nullable = false)
     private int deptid;
-
-    // Join with the User entity; the user field will not be serialized in the default admin endpoint
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "userid", insertable = false, updatable = false)
-    @JsonIgnore
-    private User user;
 
     // Getters and setters
 
