@@ -26,67 +26,40 @@ const HRForm = () => {
   });
 
   const [departments, setDepartments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const today = new Date().toISOString().split("T")[0];
 
   // Fetch department list
   useEffect(() => {
-    axios.get("http://localhost:8080/department")
+    axios
+      .get("http://localhost:8080/department")
       .then((response) => {
-        console.log("Fetched Department IDs:", response.data.map(dept => dept.id)); // Logs only IDs
         setDepartments(response.data);
       })
       .catch((error) => {
         console.error("Error fetching departments:", error);
+        setError("Failed to load departments.");
       });
   }, []);
-  
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  
+
     if (name === "deptId") {
       console.log("Selected Department ID:", value);
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validations
-    if (!/^[A-Za-z\s]+$/.test(formData.fullName)) {
-      alert("Full Name should contain only letters.");
-      return;
-    }
-    if (!/(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])/.test(formData.password)) {
-      alert("Password must contain at least one letter, one number, and one special character.");
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      alert("Please enter a valid email.");
-      return;
-    }
-    if (!/^\d+$/.test(formData.phoneNumber)) {
-      alert("Phone Number should contain only digits.");
-      return;
-    }
-    if (formData.address.length < 10) {
-      alert("Please enter a valid address with at least 10 characters.");
-      return;
-    }
-    if (formData.dateOfJoining < today) {
-      alert("Date of Joining cannot be a past date.");
-      return;
-    }
-    if (!formData.deptId) {
-      alert("Please select a department.");
-      return;
-    }
+    setLoading(true);
+    setError("");
 
     try {
-      // Step 1: Create User
-      const userResponse = await axios.post("/api/users", {
+      // Step 1: Create User (excluding deptId)
+      const userResponse = await axios.post("http://localhost:8080/users/create", {
         name: formData.fullName,
         password: formData.password,
         gender: formData.gender,
@@ -96,14 +69,14 @@ const HRForm = () => {
         date_of_join: formData.dateOfJoining,
       });
 
+      console.log("User Created:", userResponse.data);
       const userId = userResponse.data.userid;
 
-      // Step 2: Create HR
-      await axios.post("/api/hrs", {
+      // Step 2: Create HR entry with userid and deptId
+      await axios.post("http://localhost:8080/hrs", {
         userid: userId,
-        deptid: parseInt(formData.deptId),
+        deptid: parseInt(formData.deptId), // Convert to integer
       });
-      
 
       alert("HR successfully added!");
       setFormData({
@@ -118,7 +91,9 @@ const HRForm = () => {
       });
     } catch (error) {
       console.error("Error adding HR:", error);
-      alert("There was an error adding HR.");
+      setError("There was an error adding HR. Please check your inputs.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -126,6 +101,7 @@ const HRForm = () => {
     <div className="admin-form-container1">
       <form className="admin-form-body" onSubmit={handleSubmit}>
         <h2>Fill in the details below</h2>
+        {error && <p className="error-message">{error}</p>}
         <div className="form-row">
           <div className="form-column">
             <label htmlFor="fullName">Full Name</label>
@@ -141,13 +117,7 @@ const HRForm = () => {
           </div>
           <div className="form-column">
             <label htmlFor="gender">Gender</label>
-            <select
-              name="gender"
-              id="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              required
-            >
+            <select name="gender" id="gender" value={formData.gender} onChange={handleChange} required>
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -155,6 +125,7 @@ const HRForm = () => {
             </select>
           </div>
         </div>
+
         <div className="form-row">
           <div className="form-column">
             <label htmlFor="password">Password</label>
@@ -181,6 +152,7 @@ const HRForm = () => {
             />
           </div>
         </div>
+
         <div className="form-row">
           <div className="form-column">
             <label htmlFor="phoneNumber">Phone Number</label>
@@ -207,27 +179,21 @@ const HRForm = () => {
             />
           </div>
         </div>
+
         <div className="form-row">
           <div className="form-column">
             <label htmlFor="deptId">Department</label>
-            <select
-  name="deptId"
-  id="deptId"
-  value={formData.deptId}
-  onChange={handleChange}
-  required
->
-  <option value="">Select Department</option>
-  {departments.map((dept) => (
-    <option key={dept.id} value={String(dept.id)}>
-      {dept.name} (ID: {dept.id})
-    </option>
-  ))}
-</select>
-
-
+            <select name="deptId" id="deptId" value={formData.deptId} onChange={handleChange} required>
+              <option value="">Select Department</option>
+              {departments.map((dept) => (
+                <option key={dept.id} value={dept.id}>
+                  {dept.name} (ID: {dept.id})
+                </option>
+              ))}
+            </select>
           </div>
         </div>
+
         <div className="form-row">
           <div className="form-column full-width">
             <label htmlFor="address">Address</label>
@@ -241,7 +207,10 @@ const HRForm = () => {
             />
           </div>
         </div>
-        <button type="submit">Add HR</button>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Adding HR..." : "Add HR"}
+        </button>
       </form>
     </div>
   );

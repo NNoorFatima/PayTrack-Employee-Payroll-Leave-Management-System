@@ -4,12 +4,12 @@ import com.example.demo.model.HR;
 import com.example.demo.model.User;
 import com.example.demo.service.HRService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/hrs")
 public class HRController {
@@ -17,7 +17,8 @@ public class HRController {
     @Autowired
     private HRService hrService;
 
-    // GET /hrs - Retrieve all HR records (user data is not included due to @JsonIgnore)
+    // GET /hrs - Retrieve all HR records (user data is not included due to
+    // @JsonIgnore)
     @GetMapping
     public List<HR> getAllHRs() {
         return hrService.getAllHRs();
@@ -33,7 +34,8 @@ public class HRController {
         return ResponseEntity.notFound().build();
     }
 
-    // GET /hrs/{id}/user - Retrieve the user data associated with the given HR record
+    // GET /hrs/{id}/user - Retrieve the user data associated with the given HR
+    // record
     @GetMapping("/{id}/user")
     public ResponseEntity<User> getHRUser(@PathVariable int id) {
         HR hr = hrService.getHRById(id);
@@ -45,9 +47,9 @@ public class HRController {
 
     // POST /hrs - Create a new HR record
     @PostMapping
-    public ResponseEntity<HR> createHR(@RequestBody HR hr) {
-        HR createdHR = hrService.createHR(hr);
-        return new ResponseEntity<>(createdHR, HttpStatus.CREATED);
+    public ResponseEntity<String> createHR(@RequestBody HR hr) {
+        hrService.createHR(hr);
+        return ResponseEntity.ok("HR added successfully!");
     }
 
     // PUT /hrs/{id} - Update an existing HR record

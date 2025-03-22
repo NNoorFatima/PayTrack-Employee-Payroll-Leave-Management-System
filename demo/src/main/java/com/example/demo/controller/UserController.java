@@ -5,8 +5,11 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -24,9 +27,12 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    @PostMapping("/create") // Corrected endpoint
+    public Map<String, Integer> createUserWithId(@RequestBody User user) {
+        User savedUser = userService.createUser(user);
+        Map<String, Integer> response = new HashMap<>();
+        response.put("userid", savedUser.getUserid()); // Ensure `User` model has `userid`
+        return response;
     }
 
     @PutMapping("/{id}")
