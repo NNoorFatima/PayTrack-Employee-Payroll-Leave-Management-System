@@ -21,15 +21,13 @@ public class DepartmentService {
         return departmentRepository.findById(id).orElse(null); // Return null if not found
     }
 
-     // Create a new department
-     public Department createDepartment(Department department) {
+    // Create a new department
+    public Department createDepartment(Department department) {
         return departmentRepository.save(department);
     }
 
-    
-
-      // Delete a department by id
-      public void deleteDepartment(int id) {
+    // Delete a department by id
+    public void deleteDepartment(int id) {
         departmentRepository.deleteById(id);
     }
 }

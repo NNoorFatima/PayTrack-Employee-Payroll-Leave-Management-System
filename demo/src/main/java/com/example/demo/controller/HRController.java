@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/hrs")
 public class HRController {
@@ -17,7 +18,8 @@ public class HRController {
     @Autowired
     private HRService hrService;
 
-    // GET /hrs - Retrieve all HR records (user data is not included due to @JsonIgnore)
+    // GET /hrs - Retrieve all HR records (user data is not included due to
+    // @JsonIgnore)
     @GetMapping
     public List<HR> getAllHRs() {
         return hrService.getAllHRs();
@@ -33,7 +35,8 @@ public class HRController {
         return ResponseEntity.notFound().build();
     }
 
-    // GET /hrs/{id}/user - Retrieve the user data associated with the given HR record
+    // GET /hrs/{id}/user - Retrieve the user data associated with the given HR
+    // record
     @GetMapping("/{id}/user")
     public ResponseEntity<User> getHRUser(@PathVariable int id) {
         HR hr = hrService.getHRById(id);
@@ -61,12 +64,18 @@ public class HRController {
     }
 
     // DELETE /hrs/{id} - Delete an HR record by userid
+    // DELETE /hrs/{id} - Delete an HR record AND its associated user
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHR(@PathVariable int id) {
-        boolean deleted = hrService.deleteHR(id);
+    public ResponseEntity<String> deleteHR(@PathVariable int id) {
+        // Call the service method to delete HR and associated user
+        boolean deleted = hrService.deleteHRWithUser(id);
+
+        // Return response based on the result of deletion
         if (deleted) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("HR and User deleted successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("HR or User not found.");
         }
-        return ResponseEntity.notFound().build();
     }
+
 }

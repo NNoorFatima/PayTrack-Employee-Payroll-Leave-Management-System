@@ -1,34 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "./AdminSidebar"; // Import the Sidebar for Employee
-import "./Admin.css"; // Import your custom CSS styles for Employee
-import backgroundImg from "../images/leavreq.jpeg"; // Import background image
+import AdminSidebar from "./AdminSidebar"; // Correct import
+import "./Admin.css";
+import backgroundImg from "../images/leavreq.jpeg";
 
-// The layout component that wraps the entire employee dashboard
 const AdminLayout = ({ children }) => {
   return (
     <div className="dashboard-container">
-      {/* Background Image */}
       <div className="dashboard-background" style={{ backgroundImage: `url(${backgroundImg})` }}></div>
-
-      {/* Frosted Glass Effect Wrapper */}
       <div className="frosted-glass">
-        {/* Top Navigation */}
         <header className="top-nav">
-          <div className="nav-left">
-            
-          </div>
+          <div className="nav-left"></div>
           <div className="nav-right">
             <a href="#" className="nav-link">Profile</a>
-            <Link to="/LoginAdmin" className="nav-link logout-btn">Logout</Link>
+            <Link to="/loginAdmin" className="nav-link logout-btn">Logout</Link>
           </div>
         </header>
-
-        {/* Sidebar and Main Content */}
         <div className="dashboard-content">
-          <Sidebar /> 
+          <AdminSidebar /> {/* fixed */}
           <main className="main-content">
-            {children} {/* Dynamic content */}
+            {children}
           </main>
         </div>
       </div>
