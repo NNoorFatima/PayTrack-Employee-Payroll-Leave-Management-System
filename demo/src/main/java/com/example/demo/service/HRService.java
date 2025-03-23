@@ -51,13 +51,30 @@ public class HRService {
     }
 
     public boolean deleteHRWithUser(int userid) {
+        // Find the HR record by userid
         HR hr = hrRepository.findById(userid).orElse(null);
-        if (hr != null) {
-            int userId = hr.getUser().getUserid();
-            hrRepository.deleteById(userid);
-            userService.deleteUser(userId);
-            return true;
+
+        // Check if HR and associated user exist
+        if (hr != null && hr.getUser() != null) {
+            int userId = hr.getUser().getUserid(); // Get the associated user ID
+            try {
+                // Delete the HR record
+                hrRepository.deleteById(userid);
+
+                // Delete the associated user
+                userService.deleteUser(userId);
+
+                // Return true if both HR and User were deleted successfully
+                return true;
+            } catch (Exception e) {
+                // Log any errors for debugging
+                System.out.println("Error while deleting HR and User: " + e.getMessage());
+                e.printStackTrace();
+                return false; // Return false if an error occurs
+            }
+        } else {
+            // Return false if HR or User not found
+            return false;
         }
-        return false;
     }
 }

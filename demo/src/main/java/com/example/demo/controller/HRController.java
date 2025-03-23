@@ -4,6 +4,7 @@ import com.example.demo.model.HR;
 import com.example.demo.model.User;
 import com.example.demo.service.HRService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,9 +48,9 @@ public class HRController {
 
     // POST /hrs - Create a new HR record
     @PostMapping
-    public ResponseEntity<String> createHR(@RequestBody HR hr) {
-        hrService.createHR(hr);
-        return ResponseEntity.ok("HR added successfully!");
+    public ResponseEntity<HR> createHR(@RequestBody HR hr) {
+        HR createdHR = hrService.createHR(hr);
+        return new ResponseEntity<>(createdHR, HttpStatus.CREATED);
     }
 
     // PUT /hrs/{id} - Update an existing HR record
@@ -63,22 +64,18 @@ public class HRController {
     }
 
     // DELETE /hrs/{id} - Delete an HR record by userid
+    // DELETE /hrs/{id} - Delete an HR record AND its associated user
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHR(@PathVariable int id) {
-        boolean deleted = hrService.deleteHR(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/deleteHRWithUser/{id}")
-    public ResponseEntity<Void> deleteHRWithUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteHR(@PathVariable int id) {
+        // Call the service method to delete HR and associated user
         boolean deleted = hrService.deleteHRWithUser(id);
+
+        // Return response based on the result of deletion
         if (deleted) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok("HR and User deleted successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("HR or User not found.");
         }
-        return ResponseEntity.notFound().build();
     }
 
 }

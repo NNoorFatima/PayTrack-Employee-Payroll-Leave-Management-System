@@ -15,37 +15,50 @@ function RemoveHR() {
 const RemoveHRForm = () => {
   const [hrList, setHrList] = useState([]);
   const [selectedHR, setSelectedHR] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Fetch HR data from backend
-  useEffect(() => {
+  const fetchHRs = () => {
     fetch("http://localhost:8080/hrs")
       .then((response) => response.json())
       .then((data) => {
+        console.log("Fetched HRs:", data);
         setHrList(data);
       })
       .catch((error) => {
         console.error("Error fetching HRs:", error);
+        setError("Failed to load HRs");
       });
+  };
+
+  useEffect(() => {
+    fetchHRs();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (selectedHR) {
-      // Here you can trigger a DELETE request to your backend
-      fetch(`http://localhost:8080/hrs/deleteHRWithUser/${selectedHR}`, {
+      setLoading(true);
+      fetch(`http://localhost:8080/hrs/${selectedHR}`, {
         method: "DELETE",
       })
         .then((res) => {
           if (res.ok) {
-            alert("HR removed successfully");
-            // Optionally refetch HR list
-            setHrList((prev) => prev.filter((hr) => hr.userid !== parseInt(selectedHR)));
+            alert("HR and related User removed successfully");
+            fetchHRs(); // refresh list after deletion
             setSelectedHR("");
           } else {
             alert("Failed to remove HR");
           }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          alert("An error occurred while removing HR");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -54,24 +67,24 @@ const RemoveHRForm = () => {
       <div className="form-header">
         <h1>Remove HR Personnel</h1>
         <h2>Select HR to Remove</h2>
+        {error && <p className="error-message">{error}</p>}
       </div>
 
       <form className="admin-form-body" onSubmit={handleSubmit}>
         <select
           value={selectedHR}
           onChange={(e) => setSelectedHR(e.target.value)}
-          required
         >
-          <option value="">Select HR ID</option>
+          <option value="">Select HR</option>
           {hrList.map((hr) => (
             <option key={hr.userid} value={hr.userid}>
-              {hr.userid}
+              {hr.userid} {hr.user && hr.user.name ? `- ${hr.user.name}` : ""}
             </option>
           ))}
         </select>
 
-        <button type="submit" className="submit-btn">
-          Remove HR
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? "Removing..." : "Remove HR"}
         </button>
       </form>
     </div>

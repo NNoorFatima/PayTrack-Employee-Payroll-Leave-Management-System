@@ -73,10 +73,10 @@ const HRForm = () => {
       const userId = userResponse.data.userid;
 
       // Step 2: Create HR entry with userid and deptId
-      await axios.post("http://localhost:8080/hrs", {
+      await axios.post("http://localhost:8080/admins/hrs", {
         userid: userId,
-        deptid: parseInt(formData.deptId), // Convert to integer
-      });
+        deptid: parseInt(formData.deptId),
+      });      
 
       alert("HR successfully added!");
       setFormData({
