@@ -21,6 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/*Sara */
 /* App.css */
 
 /* Apply styles to the entire page */
@@ -54,4 +55,3 @@ p {
   font-size: 18px;
   color: #666;
 }
-
