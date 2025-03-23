@@ -15,7 +15,8 @@
     padding: 15px;
     border-radius: 8px;
     width: 150%;
-    margin: 0 auto;
+    margin-bottom: 10rem;
+    /* margin: 0 auto; */
     text-align: left;
   }
   

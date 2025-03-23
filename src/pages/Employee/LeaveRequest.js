@@ -16,10 +16,12 @@ function LeaveRequest() {
 
 const LeaveRequestForm = () => {
   const [formData, setFormData] = useState({
-    leaveType: "Sick Leave",
-    fromDate: "",
+    //leaveType: "Sick Leave",
+    // fromDate: "",
+    userId: 1,
     toDate: "",
-    reason: ""
+    reason: "",
+    status: "Pending"
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -32,32 +34,76 @@ const LeaveRequestForm = () => {
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.fromDate) errors.fromDate = "From date is required.";
-    if (!formData.toDate) errors.toDate = "To date is required.";
+    // if (!formData.fromDate) errors.fromDate = "From date is required.";
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-MM-dd format
+
+  if (!formData.toDate) errors.toDate = "To date is required.";
+  else if (formData.toDate < today) errors.toDate = "The leave date cannot be in the past."; // Validate the date
+
     if (!formData.reason) errors.reason = "Reason for leave is required.";
     return errors;
   };
 
   const handleSubmit = (e) => {
+    const userId = 1; // Assuming you have the logged-in user's ID
     e.preventDefault();
     const errors = validateForm();
-
+  
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors); // Display errors
       setSubmissionMessage(""); // Clear previous message
+
     } else {
       setFormErrors({});
-      setSubmissionMessage("Your leave request has been submitted successfully!");
-      // Optionally, you can send the form data to a server here (e.g., using fetch or axios)
-      console.log("Leave request submitted:", formData);
+      try {
+        const formDataWithUser = { 
+          ...formData,
+          leaveDate: formData.toDate, // Map to the correct field
+          userId: userId,
+        };
+        
+     
+        fetch(`http://localhost:8080/leaves`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDataWithUser), // Send formData without userId
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to submit leave request.");
+            }
+            return response.json();
+          })
+          .then((result) => {
+            setSubmissionMessage("Your leave request has been submitted successfully!");
+            console.log("Server response:", result);
+            setFormData({
+              userId:1,
+              toDate: "",
+              reason: "",
+              status: "Pending",
+            });
+          })
+          .catch((error) => {
+            console.error("Error submitting leave request:", error);
+            setSubmissionMessage("Failed to submit leave request. Please try again.");
+          });
+      } catch (error) {
+        console.error("Error submitting leave request:", error);
+        setSubmissionMessage("Failed to submit leave request. Please try again.");
+      }
     }
   };
+  
+  
 
   return (
     <div className="leave-request-form-container">
       <h2>Leave Application</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        {/* <div>
           <label>Leave Type</label>
           <select
             name="leaveType"
@@ -68,9 +114,9 @@ const LeaveRequestForm = () => {
             <option value="Sick Leave">Sick Leave</option>
             <option value="Annual Leave">Annual Leave</option>
           </select>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <label>From</label>
           <input
             type="date"
@@ -79,10 +125,10 @@ const LeaveRequestForm = () => {
             onChange={handleChange}
           />
           {formErrors.fromDate && <p className="error">{formErrors.fromDate}</p>}
-        </div>
+        </div> */}
 
         <div>
-          <label>To</label>
+          <label>Date</label>
           <input
             type="date"
             name="toDate"

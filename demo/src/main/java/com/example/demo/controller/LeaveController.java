@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Employee;
 import com.example.demo.model.Leave;
 import com.example.demo.service.LeaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,10 @@ public class LeaveController {
     public ResponseEntity<Leave> createLeave(@RequestBody Leave leave) {
         Leave createdLeave = leaveService.createLeave(leave);
         return new ResponseEntity<>(createdLeave, HttpStatus.CREATED);
+        
     }
+    
+
 
     // Update an existing leave by id
     @PutMapping("/{id}")
