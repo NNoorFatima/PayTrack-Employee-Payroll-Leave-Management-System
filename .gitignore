@@ -34,3 +34,5 @@ eslintcache
 
 # OS-specific files (Windows)
 Thumbs.db
+
+target/

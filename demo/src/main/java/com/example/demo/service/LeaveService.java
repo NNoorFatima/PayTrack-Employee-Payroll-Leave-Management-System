@@ -3,8 +3,12 @@ package com.example.demo.service;
 import com.example.demo.model.Leave;
 import com.example.demo.repository.LeaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class LeaveService {
@@ -54,6 +58,19 @@ public class LeaveService {
     public void deleteLeave(int id) {
         leaveRepository.deleteById(id);
     }
+
+
+    // public int countApprovedLeaves(int userId) {
+    //     return leaveRepository.countByUserIdAndStatus(userId, "Approved");
+    // }
+
+    public List<Leave> getApprovedLeavesByUserId(int userId) {
+        return leaveRepository.findByUserIdAndStatus(userId, "Approved");
+    }
+    
+
+
+    
 }
 
 

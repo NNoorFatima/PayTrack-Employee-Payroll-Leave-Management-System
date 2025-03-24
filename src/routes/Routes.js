@@ -17,6 +17,8 @@ import Dashboard from "../pages/Manager/Dashboard";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
 
 const AppRoutes = () => {
+  //const userId = localStorage.getItem("userId"); // Fetch user ID
+  const userId=1;
   return (
     <Routes>
       {/* <Route path="/" element={<EmployeeDashboard />} /> */}

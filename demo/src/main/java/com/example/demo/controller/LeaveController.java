@@ -72,4 +72,15 @@ public class LeaveController {
         leaveService.deleteLeave(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/approved")
+    public ResponseEntity<List<Leave>> getApprovedLeaves(@RequestParam int userId) {
+        List<Leave> approvedLeaves = leaveService.getApprovedLeavesByUserId(userId);
+        return ResponseEntity.ok(approvedLeaves);
+    }
+
+    
+
+
+
 }
