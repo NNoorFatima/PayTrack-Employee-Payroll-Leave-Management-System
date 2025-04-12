@@ -67,6 +67,13 @@ public class LeaveService {
     public List<Leave> getApprovedLeavesByUserId(int userId) {
         return leaveRepository.findByUserIdAndStatus(userId, "Approved");
     }
+    public List<Leave> getAllStatusLeave(int userId) {
+        return leaveRepository.findByUserIdAndStatus(userId, "Approved");
+    }
+    
+    public List<Leave> getAllStatusLeave(int userId, String status) {
+        return leaveRepository.findByUserIdAndStatus(userId, status);  // Pass status dynamically
+    }
     
 
 

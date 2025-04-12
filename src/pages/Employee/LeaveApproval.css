@@ -1,0 +1,108 @@
+/* src/pages/LeaveApproval.css */
+.leave-approval-container {
+  max-width: 1000px;
+  margin-top: 50px;
+  padding: 2rem;
+  height: 80vh;
+  /* overflow-x: hidden;
+  overflow-y: auto;  */
+  margin-left: 20px; /* Optional */
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.tab-buttons button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.tab-buttons button.active-tab {
+  background-color: #ffcc00;
+  font-weight: bold;
+}
+
+.leave-requests-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 2fr)); Flexible grid */
+  gap: 30px; /* Space between the grid items */
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px;
+
+  margin-bottom: 100px;
+}
+
+.leave-request-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto; /* Allow cards to adjust height as needed */
+}
+
+.leave-request-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.leave-request-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.leave-request-card p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.leave-request-card p strong {
+  font-weight: bold;
+}
+
+.leave-request-card p i {
+  font-style: italic;
+  color: #050505;
+}
+
+.leave-request-card p span {
+  font-weight: bold;
+}
+
+.leave-request-card .status {
+  font-weight: 700;
+}
+
+.leave-request-card .comments {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.leave-request-card .reason {
+  color: #666;
+}
+
+.leave-request-card .leave-date {
+  font-size: 0.9rem;
+  color: #666;
+}

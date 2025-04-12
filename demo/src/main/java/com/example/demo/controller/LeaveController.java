@@ -79,7 +79,12 @@ public class LeaveController {
         return ResponseEntity.ok(approvedLeaves);
     }
 
-    
+    @GetMapping("/allStatus")
+    public ResponseEntity<List<Leave>> getAllStatusLeave(@RequestParam int userId, @RequestParam String status) {
+        List<Leave> leaveRequests = leaveService.getAllStatusLeave(userId, status); // Use the dynamic status
+        return ResponseEntity.ok(leaveRequests);
+    }
+
 
 
 
