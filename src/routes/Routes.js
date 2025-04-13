@@ -17,6 +17,8 @@ import RemoveHr from "../pages/Administrator/RemoveHR";
 import RemoveManager from "../pages/Administrator/RemoveManager";
 import AdminLogin from "../pages/Administrator/AdminLogin";
 
+import HREmpRemoval from "../pages/HR/HREmpRemoval";
+
 import Dashboard from "../pages/Manager/Dashboard";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
 
@@ -26,7 +28,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* <Route path="/" element={<EmployeeDashboard />} /> */}
-      <Route path="/" element={<EmployeeProfile />} />
+      <Route path="/profile" element={<EmployeeProfile />} />
       <Route path="/payslip" element={<DisplaySalarySlip />} />
       <Route path="/leave-request" element={<MakeLeaveRequest />} />
       <Route path="/leave-approval" element={<LeaveApproval />} />
@@ -42,6 +44,9 @@ const AppRoutes = () => {
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
       <Route path="/loginAdmin" element={<AdminLogin />} />
+
+      
+      <Route path="/" element={<HREmpRemoval />} />
 
       {/* <Route path="/" element={<Dashboard />} />  */}
        {/* <Route path="/" element={<ManagerLogin />} /> */}
