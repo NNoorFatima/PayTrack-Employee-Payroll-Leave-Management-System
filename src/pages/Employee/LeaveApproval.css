@@ -118,3 +118,31 @@
   font-size: 0.9rem;
   color: #666;
 }
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  border-radius: 20px;
+  text-align: center;
+  text-transform: capitalize;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.badge.approved {
+  background-color:forestgreen;
+  color: white;
+}
+
+.badge.pending {
+  background-color:deepskyblue;
+  color: black;
+}
+
+.badge.rejected {
+  background-color: #e53e3e; /* Red */
+  color: white;
+}
