@@ -1,3 +1,5 @@
+
+import { Link } from "react-router-dom";
 import React from "react";
 import Sidebar from "./EmployeeSidebar"; // Import the Sidebar for Employee
 import "./EmployeeSidebar.css"; // Import your custom CSS styles for Employee
@@ -19,7 +21,7 @@ const EmployeeLayout = ({ children }) => {
           </div>
           <div className="nav-right">
             <a href="#" className="nav-link">Profile</a>
-            <a href="#" className="nav-link logout-btn">Logout</a>
+            <Link to="/loginEmp" className="nav-link logout-btn">Logout</Link>
           </div>
         </header>
 

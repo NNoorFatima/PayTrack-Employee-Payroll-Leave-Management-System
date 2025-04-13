@@ -6,7 +6,7 @@ import EmployeeProfile from "../pages/Employee/EmployeeProfile";
 import DisplaySalarySlip from "../pages/Employee/DisplaySalarySlip";
 import MakeLeaveRequest from "../pages/Employee/LeaveRequest";
 import LeaveApproval from "../pages/Employee/LeaveApproval";
-
+import EmpLogin from "../pages/Employee/EmployeeLogin";
 
 import AdminDashboard from "../pages/Administrator/AboutUS"; // ✅ Set as the default landing page
 import AddHr from "../pages/Administrator/AddHr";
@@ -28,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/payslip" element={<DisplaySalarySlip />} />
       <Route path="/leave-request" element={<MakeLeaveRequest />} />
       <Route path="/leave-approval" element={<LeaveApproval />} />
+      <Route path="/loginEmp" element={<EmpLogin />} />
 
       {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}
       <Route path="/about-us" element={<AdminDashboard />} />
