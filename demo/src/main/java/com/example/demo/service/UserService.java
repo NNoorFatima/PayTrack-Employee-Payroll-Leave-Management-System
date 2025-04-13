@@ -49,4 +49,16 @@ public class UserService {
         }
         return false;
     }
+
+     public void changePassword(int userId, String currentPassword, String newPassword) {
+        User user = userRepository.findById(userId).orElse(null);
+
+        // Direct string comparison since passwords are stored in plain text
+        if (!currentPassword.equals(user.getPassword())) {
+            throw new IllegalArgumentException("Current password is incorrect.");
+        }
+
+        user.setPassword(newPassword); // Save new password directly
+        userRepository.save(user);
+    }
 }

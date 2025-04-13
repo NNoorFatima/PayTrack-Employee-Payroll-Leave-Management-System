@@ -3,7 +3,10 @@ import Layout from "../../components/EmployeeLayout"; // Ensure the layout is co
 import "./employeeProfile.css"; // Ensure styles are consistent with Manager layout
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 const EmployeeProfilePage = () => {
+  const navigate = useNavigate();
   const [employee, setEmployee] = useState(null);
   const [user, setUser] = useState(null);
   const userId = 1; // Replace with the logged-in user's ID (e.g., from authentication)
@@ -47,6 +50,7 @@ const EmployeeProfilePage = () => {
   if (!employee || !user) {
     return <div>Loading...</div>;
   }
+  
   return (
     <Layout>
       <div className="content-section1">
@@ -63,7 +67,13 @@ const EmployeeProfilePage = () => {
         <div className="profile-item">
           <strong>Department:</strong> {employee.deptid}
         </div>
-        <button className="change-password-btn">Change Password</button>
+        
+        <button
+          className="change-password-btn"
+          onClick={() => navigate("/change-password", { state: { userId } })}
+        >
+          Change Password
+        </button>
       </div>
     </Layout>
   );

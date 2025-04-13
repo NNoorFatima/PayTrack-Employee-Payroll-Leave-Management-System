@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -44,4 +46,19 @@ public class UserController {
     public String deleteUser(@PathVariable int id) {
         return userService.deleteUser(id) ? "User deleted successfully" : "User not found";
     }
+
+    //change password
+    @PutMapping("/{id}/change-password")
+    public ResponseEntity<?> changePassword(@PathVariable int id, @RequestBody Map<String, String> payload) {
+        String currentPassword = payload.get("currentPassword");
+        String newPassword = payload.get("newPassword");
+
+        try {
+            userService.changePassword(id, currentPassword, newPassword);
+            return ResponseEntity.ok("Password updated successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 }
