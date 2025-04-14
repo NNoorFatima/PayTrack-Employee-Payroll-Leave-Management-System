@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Cache
+.cache/
+eslintcache
+*.cache
+
+# Editor/IDE files (if you switch editors)
+.vscode/
+.idea/
+*.iml
+
+# OS-specific files (Windows)
+Thumbs.db
