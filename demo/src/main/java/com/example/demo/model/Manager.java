@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +14,8 @@ public class Manager {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", referencedColumnName = "userid", insertable = false, updatable = false)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @JsonIgnore // This will prevent the user field from being serialized
+    
     private User user;
 
     @Column(name = "deptid", nullable = false)

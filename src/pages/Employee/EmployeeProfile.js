@@ -24,7 +24,7 @@ const EmployeeProfilePage = () => {
         setEmployee(data);
 
         // Fetch User Data after employee data is successfully fetched
-        return fetch(`http://localhost:8080/users/${userId}`);
+        return fetch(`http://localhost:8080/users/${localStorage.getItem("employeeId")}`);
       })
       .then((response) => {
         if (!response.ok) {

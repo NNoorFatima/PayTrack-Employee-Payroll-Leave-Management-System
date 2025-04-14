@@ -15,14 +15,20 @@ import AdminLogin from "../pages/Administrator/AdminLogin";
 
 import Dashboard from "../pages/Manager/Dashboard";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
+import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
+
+import EmployeeLogin from "../pages/Employee/EmployeeLogin";
+
+
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/* <Route path="/" element={<EmployeeDashboard />} /> */}
-      <Route path="/" element={<EmployeeProfile />} />
+      {/* <Route path="/" element={<EmployeeProfile />} /> */}
       <Route path="/payslip" element={<DisplaySalarySlip />} />
       <Route path="/leave-request" element={<MakeLeaveRequest />} />
+      <Route path="/profile" element={<EmployeeProfile />} />
 
 
       {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}
@@ -33,8 +39,18 @@ const AppRoutes = () => {
       <Route path="/remove-manager" element={<RemoveManager />} />
       <Route path="/loginAdmin" element={<AdminLogin />} />
 
-      {/* <Route path="/" element={<Dashboard />} />  */}
-       {/* <Route path="/" element={<ManagerLogin />} /> */}
+      <Route path="/manager-dashboard" element={<Dashboard />} /> 
+
+       <Route path="/employee-profile" element={<EmployeeProfile />} />
+    
+      <Route path="/list-employees" element={<ListEmployees />} />
+
+      <Route path="/manager-login" element={<ManagerLogin />} />
+      <Route path="/employee-login" element={<EmployeeLogin />} />
+      
+
+      <Route path="/" element={<EmployeeLogin />} />
+
     </Routes>
   );
 };

@@ -1,5 +1,5 @@
 com\example\demo\DemoApplication.class
 com\example\demo\repository\DepartmentRepository.class
-com\example\demo\controller\DepartmentController.class
 com\example\demo\model\Department.class
 com\example\demo\service\DepartmentService.class
+com\example\demo\controller\DepartmentController.class
