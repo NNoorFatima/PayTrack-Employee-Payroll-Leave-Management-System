@@ -1,7 +1,7 @@
 // ManagerDashboard.js
 import React, { useState , useEffect } from "react";
 import ManagerLayout from "../../components/ManagerLayout"; // Import ManagerLayout
-import "./Dashboard.css"; // Keeping the existing styles
+import "./HomePage.css"; // Keeping the existing styles
 import "./Employee.css"; // custom styles here
 import "./HomeSection.css";
 
