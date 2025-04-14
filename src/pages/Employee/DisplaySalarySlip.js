@@ -6,7 +6,7 @@ import EmployeeLayout from "../../components/EmployeeLayout";
 const DisplaySalarySlips = ({ userId }) => {
   //const storedUserId = localStorage.getItem("userId");  // 🔥 Get stored userId
   //userId = userId || storedUserId || 1; // Default to stored ID or 1
-  userId =1;
+  userId =localStorage.getItem("employeeId");;
 
   // const [userId, setUserId] = useState(0);
   const [salary, setBaseSalary] = useState(0);

@@ -7,13 +7,13 @@ const ChangePasswordPage = () => {
   const location = useLocation();
   const userId = location.state?.userId;
 
-  // ✅ Call all hooks at the top (before any early return)
+  //  Call all hooks at the top (before any early return)
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  // ❌ Don't return before hooks — instead render a message inside JSX
+  //  Don't return before hooks — instead render a message inside JSX
   if (!userId) {
     return (
       <Layout>

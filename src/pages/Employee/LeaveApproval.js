@@ -9,7 +9,7 @@ const LeaveApproval = ({ userId = 1 }) => {
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("all");  // Default to 'all' tab
-
+  userId=localStorage.getItem("employeeId");
   // Function to fetch leave requests based on status
   const fetchLeaveRequests = async (status) => {
     try {

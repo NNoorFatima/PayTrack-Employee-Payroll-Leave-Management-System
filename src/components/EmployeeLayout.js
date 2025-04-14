@@ -20,8 +20,9 @@ const EmployeeLayout = ({ children }) => {
             
           </div>
           <div className="nav-right">
-            <a href="#" className="nav-link">Profile</a>
-            <Link to="/loginEmp" className="nav-link logout-btn">Logout</Link>
+            {/* <a href="#" className="nav-link">Profile</a> */}
+            <Link to="/profile" className="nav-link">Profile</Link>
+            <Link to="/employee-login" className="nav-link logout-btn">Logout</Link>
           </div>
         </header>
 
