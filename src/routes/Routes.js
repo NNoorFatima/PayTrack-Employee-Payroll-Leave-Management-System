@@ -21,6 +21,11 @@ import HREmpRemoval from "../pages/HR/HREmpRemoval";
 
 import Dashboard from "../pages/Manager/Dashboard";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
+import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
+
+import EmployeeLogin from "../pages/Employee/EmployeeLogin";
+
+
 
 const AppRoutes = () => {
   //const userId = localStorage.getItem("userId"); // Fetch user ID
@@ -45,11 +50,18 @@ const AppRoutes = () => {
       <Route path="/remove-manager" element={<RemoveManager />} />
       <Route path="/loginAdmin" element={<AdminLogin />} />
 
-      
-      <Route path="/" element={<HREmpRemoval />} />
+      <Route path="/manager-dashboard" element={<Dashboard />} /> 
 
-      {/* <Route path="/" element={<Dashboard />} />  */}
-       {/* <Route path="/" element={<ManagerLogin />} /> */}
+       <Route path="/employee-profile" element={<EmployeeProfile />} />
+    
+      <Route path="/list-employees" element={<ListEmployees />} />
+
+      <Route path="/manager-login" element={<ManagerLogin />} />
+      <Route path="/employee-login" element={<EmployeeLogin />} />
+      
+
+      <Route path="/" element={<EmployeeLogin />} />
+
     </Routes>
   );
 };

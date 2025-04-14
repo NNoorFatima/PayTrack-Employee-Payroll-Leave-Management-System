@@ -61,4 +61,19 @@ public class UserController {
         }
     }
 
+    // New login endpoint to validate user credentials
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+
+        // Check if user exists and the password is correct
+        if (userService.validateCredentials(username, password)) {
+            // Return HTTP 200 if login is successful
+            return ResponseEntity.ok("Login successful");
+        } else {
+            // Return HTTP 401 Unauthorized if credentials are incorrect
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect username or password");
+        }
+    }
 }

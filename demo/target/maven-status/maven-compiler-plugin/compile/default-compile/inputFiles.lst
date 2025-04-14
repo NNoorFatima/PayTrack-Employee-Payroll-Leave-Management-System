@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\paytrack\demo\src\main\java\com\example\demo\controller\AdminController.java
 D:\paytrack\demo\src\main\java\com\example\demo\controller\DepartmentController.java
 D:\paytrack\demo\src\main\java\com\example\demo\controller\EmployeeController.java
@@ -27,3 +28,34 @@ D:\paytrack\demo\src\main\java\com\example\demo\service\HRService.java
 D:\paytrack\demo\src\main\java\com\example\demo\service\LeaveService.java
 D:\paytrack\demo\src\main\java\com\example\demo\service\ManagerService.java
 D:\paytrack\demo\src\main\java\com\example\demo\service\UserService.java
+=======
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\AdminController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\DepartmentController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\EmployeeController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\HRController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\LeaveController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\ManagerController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\controller\UserController.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\DemoApplication.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\Admin.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\Department.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\Employee.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\HR.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\Leave.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\Manager.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\model\User.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\AdminRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\DepartmentRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\EmployeeRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\HRRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\LeaveRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\ManagerRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\repository\UserRepository.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\AdminService.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\DepartmentService.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\EmployeeService.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\HRService.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\LeaveService.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\ManagerService.java
+E:\Semester_6_Data\SE\New folder\PayTrack-Employee-Payroll-Leave-Management-System\demo\src\main\java\com\example\demo\service\UserService.java
+>>>>>>> origin/Munim

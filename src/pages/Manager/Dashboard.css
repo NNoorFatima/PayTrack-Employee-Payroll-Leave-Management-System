@@ -77,3 +77,26 @@
     line-height: 1.5;
     color: #e0e0e0;
 }
+
+
+/* .employees-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .employees-table th,
+  .employees-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .employees-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .employees-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  } */
