@@ -28,7 +28,7 @@ const EmployeeLogin = () => {
     alert("Login successful! Redirecting to Employee Dashboard...");
     try {
       // Make an API call to check if the user exists and the password is correct
-      const response = await fetch("http://localhost:8080/managers/login", {
+      const response = await fetch("http://localhost:8080/employees/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,12 +40,14 @@ const EmployeeLogin = () => {
       if (response.ok) {
         // Logic: parse the response and store the user ID for future API calls
         const data = await response.json();
-        localStorage.setItem("employeeId", data.managerId); 
+        console.log(data);
+        localStorage.setItem("employeeId", data.employeeId); 
         localStorage.setItem("departmentId", data.departmentId); 
+        console.log("User ID:", data.employeeId);
         
 
         // alert("Login successful! Redirecting to Manager Dashboard...");
-        navigate("/employee-profile");
+        navigate("/profile");
       } else {
         // If not OK, display an alert with an error message
         alert("Incorrect username or password.");

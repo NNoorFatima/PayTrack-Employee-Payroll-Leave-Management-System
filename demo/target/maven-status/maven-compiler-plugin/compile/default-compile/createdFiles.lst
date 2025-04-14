@@ -27,4 +27,3 @@ com\example\demo\repository\ManagerRepository.class
 com\example\demo\repository\HRRepository.class
 com\example\demo\service\EmployeeService.class
 com\example\demo\service\HRService.class
-com\example\demo\controller\DepartmentController.class

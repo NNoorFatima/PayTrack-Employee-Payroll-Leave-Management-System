@@ -9,7 +9,7 @@ const EmployeeProfilePage = () => {
   const navigate = useNavigate();
   const [employee, setEmployee] = useState(null);
   const [user, setUser] = useState(null);
-  const userId = 1; // Replace with the logged-in user's ID (e.g., from authentication)
+  const userId = localStorage.getItem("employeeId"); // Replace with the logged-in user's ID (e.g., from authentication)
   useEffect(() => {
     // Fetch Employee Data
     fetch(`http://localhost:8080/employees/${userId}`)
@@ -27,7 +27,7 @@ const EmployeeProfilePage = () => {
         setEmployee(data);
 
         // Fetch User Data after employee data is successfully fetched
-        return fetch(`http://localhost:8080/users/${localStorage.getItem("employeeId")}`);
+        return fetch(`http://localhost:8080/users/${userId}`);
       })
       .then((response) => {
         if (!response.ok) {
