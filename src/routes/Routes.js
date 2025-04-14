@@ -19,7 +19,7 @@ import AdminLogin from "../pages/Administrator/AdminLogin";
 
 import HREmpRemoval from "../pages/HR/HREmpRemoval";
 
-import Dashboard from "../pages/Manager/Dashboard";
+import Dashboard from "../pages/Manager/HomePage";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
 import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
 
@@ -64,8 +64,8 @@ const AppRoutes = () => {
       
       
       {/* root paths  */}
-      {/* <Route path="/" element={<ManagerLogin />} /> */}
-      <Route path="/" element={<EmployeeLogin />} />
+      <Route path="/" element={<ManagerLogin />} />
+      {/* <Route path="/" element={<EmployeeLogin />} /> */}
 
     </Routes>
   );
