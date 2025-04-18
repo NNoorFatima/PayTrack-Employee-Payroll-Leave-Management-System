@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Manager;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000") // This allows requests from your React frontend
 @RestController
@@ -121,6 +123,42 @@ public class AdminController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Manager or User not found.");
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginAdmin(@RequestBody Map<String, String> loginData) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+
+        // 🔍 Debug print: just for dev
+        System.out.println("🛂 Admin Login Attempt:");
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
+
+        if (!userService.validateCredentials(username, password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Incorrect username or password");
+        }
+
+        User user = userService.findByName(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("User not found");
+        }
+
+        Admin admin = adminService.getAdminById(user.getUserid());
+        if (admin == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("User is not an admin");
+        }
+
+        // Build response
+        Map<String, Object> response = new HashMap<>();
+        response.put("adminId", admin.getUserid());
+        response.put("username", user.getName());
+        response.put("userId", user.getUserid());
+
+        return ResponseEntity.ok(response);
     }
 
 }

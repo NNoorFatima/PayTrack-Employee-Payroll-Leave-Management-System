@@ -50,7 +50,7 @@ public class UserService {
         return false;
     }
 
-     public void changePassword(int userId, String currentPassword, String newPassword) {
+    public void changePassword(int userId, String currentPassword, String newPassword) {
         User user = userRepository.findById(userId).orElse(null);
 
         // Direct string comparison since passwords are stored in plain text
@@ -61,15 +61,25 @@ public class UserService {
         user.setPassword(newPassword); // Save new password directly
         userRepository.save(user);
     }
+
     // New method to validate user credentials
     public boolean validateCredentials(String username, String password) {
-        // Assumes that your UserRepository has a method to find a user by name.
-        // If not, you will need to add one.
+        System.out.println("🔍 Looking for user: '" + username + "'");
         User user = userRepository.findByName(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return true;
+
+        if (user == null) {
+            System.out.println("❌ User not found in DB.");
+            return false;
         }
-        return false;
+
+        System.out.println("✅ User found: " + user.getName());
+        System.out.println("🔐 Password in DB: '" + user.getPassword() + "'");
+        System.out.println("🔐 Password received: '" + password + "'");
+
+        boolean match = user.getPassword().equals(password);
+        System.out.println("✅ Password match: " + match);
+
+        return match; // This line is now dynamic!
     }
 
     // New helper method to retrieve a user by username
@@ -77,5 +87,4 @@ public class UserService {
         return userRepository.findByName(username);
     }
 
-    
 }

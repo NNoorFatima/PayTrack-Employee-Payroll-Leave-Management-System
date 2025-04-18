@@ -27,8 +27,6 @@ import EmployeeLogin from "../pages/Employee/EmployeeLogin";
 import Interface from '../pages/InterfaceSelector/Interface';
 
 
-
-
 const AppRoutes = () => {
   //const userId = localStorage.getItem("userId"); // Fetch user ID
   // const userId=1;
@@ -44,6 +42,10 @@ const AppRoutes = () => {
       <Route path="/change-password" element={<ChangePasswordPage />} />
 
 
+      {/* Admin */}
+      {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}
+      <Route path="/about-us" element={<AdminDashboard />} />
+      <Route path="/add-hr" element={<AddHr />} />
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />

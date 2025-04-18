@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
-import "./login.css"; // Same frosted-glass styling
+import "./login.css"; 
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -11,16 +11,18 @@ const AdminLogin = () => {
     password: "",
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle login submission
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/admin/login", {
+      const response = await fetch("http://localhost:8080/admins/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,10 +33,11 @@ const AdminLogin = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Admin Login Success:", data);
+
         localStorage.setItem("adminId", data.employeeId);
 
-        alert("Login successful! Redirecting to Admin Dashboard...");
-        navigate("/profile"); // redirect to admin dashboard
+        //alert("Login successful! Redirecting to Admin Dashboard...");
+        navigate("/about-us"); // Redirect to admin dashboard
       } else {
         alert("Incorrect username or password.");
       }
