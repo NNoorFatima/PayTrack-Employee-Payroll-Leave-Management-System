@@ -1,36 +1,51 @@
+// ManagerLayout.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ManagerSidebar from "./ManagerSidebar"; // Import the Sidebar
 import "./Manager.css"; // Import your CSS styles
 import backgroundImg from "../images/leavreq.jpeg"; // Import background image
 
 // The layout component that wraps the entire dashboard
-const ManagerLayout = ({ children }) => {
+const ManagerLayout = ({ children, setView }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-container">
-      {/* Background Image - This can be customized */}
-      <div className="dashboard-background" style={{ backgroundImage: `url(${backgroundImg})` }}></div>
+      {/* Background Image */}
+      <div
+        className="dashboard-background"
+        style={{ backgroundImage: `url(${backgroundImg})` }}
+      ></div>
 
       {/* Frosted Glass Effect Wrapper */}
       <div className="frosted-glass">
         {/* Top Navigation */}
         <header className="top-nav">
           <div className="nav-left">
-            {/* <h2 className="sidebar-title">Manager Panel</h2>  */}
-            {/* <h2 >Manager Panel</h2>  */}
+            {/* Title or logo */}
           </div>
           <div className="nav-right">
-            <a href="#" className="nav-link">Profile</a>
-            <a href="#" className="nav-link logout-btn">Logout</a>
+            <a href="#" className="nav-link">
+              Profile
+            </a>
+            <a
+              href="#"
+              className="nav-link logout-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/manager-login");
+              }}
+            >
+              Logout
+            </a>
           </div>
         </header>
-      
+
         {/* Sidebar and Main Content */}
         <div className="dashboard-content">
-          <ManagerSidebar /> 
-          <main className="main-content">
-            {/* Dynamic content will be rendered here */}
-            {children}
-          </main>
+          {/* Pass the setView prop to ManagerSidebar */}
+          <ManagerSidebar setView={setView} />
+          <main className="main-content">{children}</main>
         </div>
       </div>
     </div>

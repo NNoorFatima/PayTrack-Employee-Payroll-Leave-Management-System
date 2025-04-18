@@ -1,0 +1,139 @@
+/* 
+  1. Replace `../assets/city-bg.jpg` with your own background path.
+  2. Import a professional font in your index.html or global CSS for a nicer look.
+  3. Adjust colors, spacing, and styles to suit your brand.
+*/
+
+/* Overall page wrapper with city background */
+.dashboard-wrapper {
+    min-height: 80vh;
+    width: 80vw;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    background-size: cover;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+  }
+  
+  /* Top navigation bar with frosted effect */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    
+    /* Frosted glass */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .nav-left h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .nav-right .nav-link {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .nav-right .nav-link:hover {
+    color: #ffd700; /* Golden hover color */
+  }
+  
+  /* Main content layout: sidebar + main */
+  .dashboard-content {
+    display: flex;
+    flex: 1;
+
+  }
+  
+  /* Sidebar with frosted effect */
+  .sidebar {
+    width: 220px;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+  
+    /* Frosted glass */
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 1.2rem;
+  }
+  
+  .sidebar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .sidebar a:hover {
+    color: #ffd700;
+  }
+  
+  /* Main area where content goes */
+  .main-area {
+    flex: 1;
+    padding: 2rem;
+    box-sizing: border-box;
+  
+    /* Subtle frosted glass behind main content  */
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+
+  
+  
+  .content-section {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .content-section h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .content-section p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Button styling */
+  .primary-btn {
+    background-color: #ffd700; /* Golden */
+    color: #000;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .primary-btn:hover {
+    background-color: #e5c100;
+  }
+  

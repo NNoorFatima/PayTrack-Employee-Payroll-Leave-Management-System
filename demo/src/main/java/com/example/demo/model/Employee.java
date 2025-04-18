@@ -57,3 +57,13 @@ public class Employee {
 
 }
 
+/*
+ * @Entity helps us map our class to a database table
+ * @Table allows us to specify the name of the table
+ * @Id specifies the primary key
+ * @Column specifies the column name
+ * @OneToOne specifies a one-to-one relationship
+ * @JoinColumn specifies the foreign key
+ * @JsonIgnore prevents the user field from being serialized
+ * 
+ */

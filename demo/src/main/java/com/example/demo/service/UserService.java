@@ -49,4 +49,33 @@ public class UserService {
         }
         return false;
     }
+
+     public void changePassword(int userId, String currentPassword, String newPassword) {
+        User user = userRepository.findById(userId).orElse(null);
+
+        // Direct string comparison since passwords are stored in plain text
+        if (!currentPassword.equals(user.getPassword())) {
+            throw new IllegalArgumentException("Current password is incorrect.");
+        }
+
+        user.setPassword(newPassword); // Save new password directly
+        userRepository.save(user);
+    }
+    // New method to validate user credentials
+    public boolean validateCredentials(String username, String password) {
+        // Assumes that your UserRepository has a method to find a user by name.
+        // If not, you will need to add one.
+        User user = userRepository.findByName(username);
+        if (user != null && user.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+    }
+
+    // New helper method to retrieve a user by username
+    public User findByName(String username) {
+        return userRepository.findByName(username);
+    }
+
+    
 }

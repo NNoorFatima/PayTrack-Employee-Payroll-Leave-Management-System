@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
-import "../../App.css";
-
-// import "./LoginForm.css"; // Updated CSS for the frosted-glass effect
-
+import "./login.css"; // Same frosted-glass styling
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -14,44 +11,44 @@ const AdminLogin = () => {
     password: "",
   });
 
-  // Handle input changes with validation
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // Username should only contain letters & numbers (no special characters)
-    if (name === "username" && !/^[A-Za-z0-9]*$/.test(value)) {
-      alert("Username can only contain letters and numbers.");
-      return;
-    }
-
-    setFormData({ ...formData, [name]: value });
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Handle login form submission
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
-    // Validate Username (Only Letters & Numbers)
-    if (!/^[A-Za-z0-9]+$/.test(formData.username)) {
-      alert("Username should only contain letters and numbers.");
-      return;
-    }
+    try {
+      const response = await fetch("http://localhost:8080/admin/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Validate Password (Min 8 Characters, 1 Letter, 1 Number, 1 Symbol)
-    if (!/(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(formData.password)) {
-      alert("Password must be at least 8 characters long and contain a letter, a number, and a special character.");
-      return;
-    }
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Admin Login Success:", data);
+        localStorage.setItem("adminId", data.employeeId);
 
-    alert("Login successful! Redirecting to About Us...");
-    navigate("/about-us");
+        alert("Login successful! Redirecting to Admin Dashboard...");
+        navigate("/profile"); // redirect to admin dashboard
+      } else {
+        alert("Incorrect username or password.");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert("Login failed. Please try again later.");
+    }
   };
 
   return (
-    <div className="login-container"> {/* Background image wrapper */}
-      <div className="wrapper"> {/* Frosted-glass effect */}
+    <div className="login-container">
+      <div className="wrapper">
         <form onSubmit={handleLogin}>
-          <h1>Login</h1>
+          <h1>Admin Login</h1>
 
           <div className="input-box">
             <input
@@ -81,12 +78,10 @@ const AdminLogin = () => {
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#">Forget password?</a>
+            <a href="#">Forgot password?</a>
           </div>
 
-          <div className="spacer"></div> {/* Adjust spacing */}
           <button type="submit">Login</button>
-          
         </form>
       </div>
     </div>

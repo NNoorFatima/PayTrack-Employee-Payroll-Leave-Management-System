@@ -13,9 +13,10 @@ const Sidebar = () => {
         <li><button onClick={() => navigate("/payslip")}>🏠 PaySlip</button></li>
         <li><button onClick={() => navigate("/profile")}>📝Profile</button></li>
         <li><button onClick={() => navigate("/leave-request")}>💼 Leave Requests</button></li>
+        <li><button onClick={() => navigate("/leave-approval")}>🚨 Leave Approval</button></li>
         {/* Uncomment for Logout functionality if needed */}
         {/* <li style={{ marginTop: "auto" }}>
-          <button className="logout-btn" onClick={() => navigate("/LoginForm")}>Logout</button>
+          <button className="logout-btn" onClick={() => navigate("/eLoginForm")}>Logout</button>
         </li> */}
       </ul>
     </aside>

@@ -4,6 +4,7 @@ import com.example.demo.model.Leave;
 import com.example.demo.repository.LeaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -40,8 +41,8 @@ public class LeaveService {
         return null;
     }
 
-       // **New: Update only the status of an existing leave**
-       public Leave updateLeaveStatus(int id, String status) {
+    // **New: Update only the status of an existing leave**
+    public Leave updateLeaveStatus(int id, String status) {
         Leave existingLeave = leaveRepository.findById(id).orElse(null);
         if (existingLeave != null) {
             existingLeave.setStatus(status);
@@ -54,8 +55,21 @@ public class LeaveService {
     public void deleteLeave(int id) {
         leaveRepository.deleteById(id);
     }
+
+    // public int countApprovedLeaves(int userId) {
+    // return leaveRepository.countByUserIdAndStatus(userId, "Approved");
+    // }
+
+    public List<Leave> getApprovedLeavesByUserId(int userId) {
+        return leaveRepository.findByUserIdAndStatus(userId, "Approved");
+    }
+
+    public List<Leave> getAllStatusLeave(int userId) {
+        return leaveRepository.findByUserIdAndStatus(userId, "Approved");
+    }
+
+    public List<Leave> getAllStatusLeave(int userId, String status) {
+        return leaveRepository.findByUserIdAndStatus(userId, status); // Pass status dynamically
+    }
+
 }
-
-
-
-

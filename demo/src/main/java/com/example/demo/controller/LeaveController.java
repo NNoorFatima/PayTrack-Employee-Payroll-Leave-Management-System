@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/leaves")
 public class LeaveController {
@@ -38,6 +39,7 @@ public class LeaveController {
     public ResponseEntity<Leave> createLeave(@RequestBody Leave leave) {
         Leave createdLeave = leaveService.createLeave(leave);
         return new ResponseEntity<>(createdLeave, HttpStatus.CREATED);
+
     }
 
     // Update an existing leave by id
@@ -52,7 +54,8 @@ public class LeaveController {
 
     // **New: Update only the status of an existing leave**
     @PutMapping("/{id}/status")
-    public ResponseEntity<Leave> updateLeaveStatus(@PathVariable int id, @RequestBody Map<String, String> statusUpdate) {
+    public ResponseEntity<Leave> updateLeaveStatus(@PathVariable int id,
+            @RequestBody Map<String, String> statusUpdate) {
         String newStatus = statusUpdate.get("status");
         Leave updatedLeave = leaveService.updateLeaveStatus(id, newStatus);
         if (updatedLeave != null) {
@@ -67,4 +70,17 @@ public class LeaveController {
         leaveService.deleteLeave(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/approved")
+    public ResponseEntity<List<Leave>> getApprovedLeaves(@RequestParam int userId) {
+        List<Leave> approvedLeaves = leaveService.getApprovedLeavesByUserId(userId);
+        return ResponseEntity.ok(approvedLeaves);
+    }
+
+    @GetMapping("/allStatus")
+    public ResponseEntity<List<Leave>> getAllStatusLeave(@RequestParam int userId, @RequestParam String status) {
+        List<Leave> leaveRequests = leaveService.getAllStatusLeave(userId, status); // Use the dynamic status
+        return ResponseEntity.ok(leaveRequests);
+    }
+
 }
