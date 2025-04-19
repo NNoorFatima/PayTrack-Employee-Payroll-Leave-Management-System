@@ -18,6 +18,7 @@ import RemoveManager from "../pages/Administrator/RemoveManager";
 import AdminLogin from "../pages/Administrator/AdminLogin";
 
 import HREmpRemoval from "../pages/HR/HREmpRemoval";
+import HrLeaveReporting from "../pages/HR/LeaveReporting";
 
 import Dashboard from "../pages/Manager/HomePage";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
@@ -64,7 +65,8 @@ const AppRoutes = () => {
       
       
       {/* root paths  */}
-      <Route path="/" element={<Interface />} />
+      {/*<Route path="/" element={<Interface />} />*/}
+      <Route path="/" element={<HrLeaveReporting />} />
       {/* <Route path="/" element={<EmployeeLogin />} /> */}
 
     </Routes>

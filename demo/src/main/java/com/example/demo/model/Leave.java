@@ -35,7 +35,8 @@ public class Leave {
         return id;
     }
 
-    // Optionally, you can omit the setter for id if you want it to be managed automatically.
+    // Optionally, you can omit the setter for id if you want it to be managed
+    // automatically.
     public void setId(int id) {
         this.id = id;
     }
