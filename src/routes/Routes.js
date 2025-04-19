@@ -55,6 +55,7 @@ const AppRoutes = () => {
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
       <Route path="/emp-removal" element={<HREmpRemoval />} />
+      <Route path="/hr-leave-reporting" element={<HrLeaveReporting />} />
 
 
       {/* Manager */}
@@ -66,7 +67,7 @@ const AppRoutes = () => {
       
       {/* root paths  */}
       {/*<Route path="/" element={<Interface />} />*/}
-      <Route path="/" element={<HrLeaveReporting />} />
+      <Route path="/" element={<Interface />} />
       {/* <Route path="/" element={<EmployeeLogin />} /> */}
 
     </Routes>
