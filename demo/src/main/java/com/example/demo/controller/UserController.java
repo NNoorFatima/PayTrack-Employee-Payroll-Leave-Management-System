@@ -47,6 +47,20 @@ public class UserController {
         return userService.deleteUser(id) ? "User deleted successfully" : "User not found";
     }
 
+    //change password
+    @PutMapping("/{id}/change-password")
+    public ResponseEntity<?> changePassword(@PathVariable int id, @RequestBody Map<String, String> payload) {
+        String currentPassword = payload.get("currentPassword");
+        String newPassword = payload.get("newPassword");
+
+        try {
+            userService.changePassword(id, currentPassword, newPassword);
+            return ResponseEntity.ok("Password updated successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     // New login endpoint to validate user credentials
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
@@ -59,8 +73,7 @@ public class UserController {
             return ResponseEntity.ok("Login successful");
         } else {
             // Return HTTP 401 Unauthorized if credentials are incorrect
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                 .body("Incorrect username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect username or password");
         }
     }
 }

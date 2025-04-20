@@ -25,9 +25,9 @@ const ManagerLayout = ({ children, setView }) => {
             {/* Title or logo */}
           </div>
           <div className="nav-right">
-            <a href="#" className="nav-link">
+            {/* <a href="#" className="nav-link">
               Profile
-            </a>
+            </a> */}
             <a
               href="#"
               className="nav-link logout-btn"

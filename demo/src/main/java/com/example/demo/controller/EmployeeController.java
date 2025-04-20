@@ -80,6 +80,8 @@ public class EmployeeController {
         return ResponseEntity.notFound().build();
     }
 
+   
+    
     // GET /employees/users/department/{deptId} - Retrieve user data for employees in a specific department
     @GetMapping("/users/department/{deptId}")
     public ResponseEntity<List<User>> getEmployeeUsersByDeptId(@PathVariable int deptId) {
@@ -111,19 +113,19 @@ public class EmployeeController {
                      .body("User not found");
          }
  
-         Employee employee = employeeService.getEmployeeById(user.getUserid());
-         if (employee == null) {
-             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                     .body("User is not an employee");
-         }
+        Employee employee = employeeService.getEmployeeById(user.getUserid());
+        if (employee == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("User is not an employee");
+        }
  
-         Map<String, Object> response = new HashMap<>();
-         response.put("employeeId", employee.getUserid());
-         response.put("username", user.getName());
-         response.put("userId", user.getUserid());
-         response.put("departmentId", employee.getDeptid());
+        Map<String, Object> response = new HashMap<>();
+        response.put("employeeId", employee.getUserid());
+        response.put("username", user.getName());
+        response.put("userId", user.getUserid());
+        response.put("departmentId", employee.getDeptid());
  
-         return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);
      }
  
     

@@ -22,6 +22,11 @@ const ManagerSidebar = ({ setView }) => {
         <li>
           <button onClick={() => setView("reports")}>📊 Reports</button>
         </li>
+        <li>
+          <button onClick={() => setView("profile")}>🧑 Profile</button>
+        </li>
+
+        
         {/* 
         <li style={{ marginTop: "auto" }}>
           <button className="logout-btn" onClick={() => navigate("/LoginForm")}>Logout</button>

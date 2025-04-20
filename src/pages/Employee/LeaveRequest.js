@@ -18,7 +18,7 @@ const LeaveRequestForm = () => {
   const [formData, setFormData] = useState({
     //leaveType: "Sick Leave",
     // fromDate: "",
-    userId: 1,
+    userId: localStorage.getItem("employeeId"),
     toDate: "",
     reason: "",
     status: "Pending"
@@ -45,7 +45,7 @@ const LeaveRequestForm = () => {
   };
 
   const handleSubmit = (e) => {
-    const userId = 1; // Assuming you have the logged-in user's ID
+    const userId = localStorage.getItem("employeeId");; // Assuming you have the logged-in user's ID
     e.preventDefault();
     const errors = validateForm();
   
@@ -80,7 +80,7 @@ const LeaveRequestForm = () => {
             setSubmissionMessage("Your leave request has been submitted successfully!");
             console.log("Server response:", result);
             setFormData({
-              userId:1,
+              userId:localStorage.getItem("employeeId"),
               toDate: "",
               reason: "",
               status: "Pending",
