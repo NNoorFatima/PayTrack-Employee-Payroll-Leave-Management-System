@@ -32,7 +32,7 @@
 }
 
 .employees-table th {
-    background-color:rgb(238, 190, 2);
+    background-color:rgb(222, 169, 8);
     color: rgb(11, 11, 11);
     font-weight: bold;
     padding: 12px 15px;
@@ -42,7 +42,7 @@
 
 .employees-table td {
     padding: 12px 15px;
-    border-bottom: 1px solid #ede6e6;
+    border-bottom: 1px solid #0b0b0b;
 
     /* font-family: 'Open Sans', sans-serif; */
 }

@@ -49,7 +49,7 @@ const AppRoutes = () => {
       <Route path="/employee-login" element={<EmployeeLogin />} />
       
 
-      <Route path="/" element={<EmployeeLogin />} />
+      <Route path="/" element={<ManagerLogin />} />
 
     </Routes>
   );
