@@ -10,7 +10,7 @@
     min-height: 100vh;
     padding-top: 80px; /* move the table slightly down from top */
     font-family: 'Open Sans', sans-serif;  /* apply a clean sans-serif font */
-    color: #000;  /* choose a neutral text color */
+    color: #000;  /* choose a black text color */
 }
 
 .table-wrapper {
