@@ -116,7 +116,9 @@ const LeaveRequests = () => {
     const status = "Pending";
 
     if (departmentId) {
-      fetch(`http://localhost:8080/leaves/byDeptAndStatus?deptId=${departmentId}&status=${status}`)
+      fetch(
+        `http://localhost:8080/leaves/byDeptAndStatus?deptId=${departmentId}&status=${status}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log("Leave Requests fetched:", data);
@@ -131,6 +133,41 @@ const LeaveRequests = () => {
     }
   }, []);
 
+  // Handler for clicking on a name
+  const handleNameClick = async (report) => {
+    const { leaveDetails } = report;
+    // Ask user accept or reject
+    const confirmed = window.confirm(
+      "Click OK to ACCEPT this leave request, or Cancel to REJECT."
+    );
+    const newStatus = confirmed ? "Approved" : "Rejected";
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/leaves/${leaveDetails.id}/status`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
+      if (!response.ok) throw new Error("Failed to update status");
+      const updatedLeave = await response.json();
+
+      // Update UI: reflect new status in-state
+      setReports((prev) =>
+        prev.map((r) =>
+          r.leaveDetails.id === updatedLeave.id
+            ? { ...r, leaveDetails: { ...r.leaveDetails, status: updatedLeave.status } }
+            : r
+        )
+      );
+    } catch (err) {
+      console.error(err);
+      alert("Error updating leave status. Please try again.");
+    }
+  };
+
   return (
     <div className="content-section LeaveRequest-section">
       <h1>Pending Leave Requests</h1>
@@ -139,7 +176,6 @@ const LeaveRequests = () => {
           <thead>
             <tr>
               <th>#</th>
-
               <th>Name</th>
               <th>User ID</th>
               <th>Leave Date</th>
@@ -151,11 +187,16 @@ const LeaveRequests = () => {
             {reports.map((report) => (
               <tr key={report.id}>
                 <td>{report.id}</td>
-                <td>{report.name}</td>
-
-               <td>{report.leaveDetails.userId}</td>
-               <td>{report.leaveDetails.leaveDate}</td>
-                
+                <td>
+                  <span
+                    className="name-cell"
+                    onClick={() => handleNameClick(report)}
+                  >
+                    {report.name}
+                  </span>
+                </td>
+                <td>{report.leaveDetails.userId}</td>
+                <td>{report.leaveDetails.leaveDate}</td>
                 <td>{report.leaveDetails.reason}</td>
                 <td>{report.leaveDetails.status}</td>
               </tr>
