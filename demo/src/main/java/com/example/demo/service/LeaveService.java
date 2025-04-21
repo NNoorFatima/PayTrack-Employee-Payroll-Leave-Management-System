@@ -80,6 +80,12 @@ public class LeaveService {
         return leaveRepository.findLeavesWithUserNameByDeptAndStatus(deptId, status);
     }
     
+
+    public List<Leave> getLeavesByUserMonthYear(int userId, int month, int year) {
+        return leaveRepository.findByUserIdAndMonthAndYear(userId, month, year);
+    }
+    
+  
     
 
 

@@ -98,6 +98,27 @@ public class LeaveController {
     }
 
 
+    @GetMapping("/byUserAndMonthYear")
+    public ResponseEntity<List<Leave>> getLeavesByUserMonthYear(
+        @RequestParam int userId,
+        @RequestParam int month,
+        @RequestParam int year
+    ) {
+        List<Leave> leaves = leaveService.getLeavesByUserMonthYear(userId, month, year);
+        if (leaves.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(leaves);
+    }
+    // example : curl -X GET "http://localhost:8080/leaves/byUserAndMonthYear?userId=1&month=1&year=2024"
+
+    
+
+
+
+
+
+
 
 
 

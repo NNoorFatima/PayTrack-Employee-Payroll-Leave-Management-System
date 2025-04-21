@@ -107,9 +107,10 @@ const Employees = () => {
 
 
 // Leave requests Section
-
 const LeaveRequests = () => {
   const [reports, setReports] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedReport, setSelectedReport] = useState(null);
 
   useEffect(() => {
     const departmentId = localStorage.getItem("departmentId");
@@ -133,15 +134,18 @@ const LeaveRequests = () => {
     }
   }, []);
 
-  // Handler for clicking on a name
-  const handleNameClick = async (report) => {
-    const { leaveDetails } = report;
-    // Ask user accept or reject
-    const confirmed = window.confirm(
-      "Click OK to ACCEPT this leave request, or Cancel to REJECT."
-    );
-    const newStatus = confirmed ? "Approved" : "Rejected";
+  const openModal = (report) => {
+    setSelectedReport(report);
+    setShowModal(true);
+  };
 
+  const closeModal = () => {
+    setSelectedReport(null);
+    setShowModal(false);
+  };
+
+  const handleModalAction = async (newStatus) => {
+    const { leaveDetails } = selectedReport;
     try {
       const response = await fetch(
         `http://localhost:8080/leaves/${leaveDetails.id}/status`,
@@ -154,7 +158,6 @@ const LeaveRequests = () => {
       if (!response.ok) throw new Error("Failed to update status");
       const updatedLeave = await response.json();
 
-      // Update UI: reflect new status in-state
       setReports((prev) =>
         prev.map((r) =>
           r.leaveDetails.id === updatedLeave.id
@@ -162,6 +165,7 @@ const LeaveRequests = () => {
             : r
         )
       );
+      closeModal();
     } catch (err) {
       console.error(err);
       alert("Error updating leave status. Please try again.");
@@ -190,7 +194,7 @@ const LeaveRequests = () => {
                 <td>
                   <span
                     className="name-cell"
-                    onClick={() => handleNameClick(report)}
+                    onClick={() => openModal(report)}
                   >
                     {report.name}
                   </span>
@@ -204,10 +208,29 @@ const LeaveRequests = () => {
           </tbody>
         </table>
       </div>
+
+      {showModal && selectedReport && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <p>
+              Do you want to <strong>Accept</strong> or{' '}
+              <strong>Reject</strong> the leave request for :
+              
+               <em>
+                 {selectedReport.name}
+              </em>?
+            </p>
+            <div className="modal-buttons">
+              <button onClick={() => handleModalAction("Approved")}>Accept</button>
+              <button onClick={() => handleModalAction("Rejected")}>Reject</button>
+              <button onClick={closeModal}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-
 
 
 
