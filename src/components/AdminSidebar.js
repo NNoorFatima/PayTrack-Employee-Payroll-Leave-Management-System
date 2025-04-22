@@ -12,11 +12,12 @@ const Sidebar = () => {
         {/* Clicking the button will navigate to the respective page */}
         
         <li><button onClick={() => navigate("/")}>🏠 About Us</button></li>
-        <li><button onClick={() => navigate("/remove-hr")}>Remove HR</button></li>
-        <li><button onClick={() => navigate("/remove-manager")}>💼 Remove Manager</button></li>
-        <li><button onClick={() => navigate("/add-hr")}>Add HR</button></li>
+        <li><button onClick={() => navigate("/remove-hr")}>🤐Remove HR</button></li>
+        
+        <li><button onClick={() => navigate("/add-hr")}>🕵️Add HR</button></li>
         <li><button onClick={() => navigate("/add-manager")}>💼 Add Manager</button></li>
-
+        <li><button onClick={() => navigate("/remove-manager")}>🐥 Remove Manager</button></li>
+        <li><button onClick={() => navigate("/view-hr")}>🧑‍💼 View HR</button></li>
         {/* Uncomment for Logout functionality if needed */}
         {/* <li style={{ marginTop: "auto" }}>
           <button className="logout-btn" onClick={() => navigate("/LoginAdmin")}>Logout</button>
