@@ -8,24 +8,25 @@ import MakeLeaveRequest from "../pages/Employee/LeaveRequest";
 import LeaveApproval from "../pages/Employee/LeaveApproval";
 // import EmpLogin from "../pages/Employee/EmployeeLogin";
 import ChangePasswordPage from '../pages/Employee/ChangePasswordPage';
+import EmployeeLogin from "../pages/Employee/EmployeeLogin";
 
 
-import AdminDashboard from "../pages/Administrator/AboutUS"; // ✅ Set as the default landing page
+// import AdminDashboard from "../pages/Administrator/AboutUS"; // ✅ Set as the default landing page
 import AddHr from "../pages/Administrator/AddHr";
 import AddManager from "../pages/Administrator/AddManager";
 import RemoveHr from "../pages/Administrator/RemoveHR";
 import RemoveManager from "../pages/Administrator/RemoveManager";
 import AdminLogin from "../pages/Administrator/AdminLogin";
 import AdmLogin from "../pages/Administrator/Login";
+import AboutUs from "../pages/Administrator/AboutUS";
 
 import HREmpRemoval from "../pages/HR/HREmpRemoval";
+import LeaveReorting from "../pages/HR/LeaveReporting";
 
 import Dashboard from "../pages/Manager/HomePage";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
 import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
 
-import EmployeeLogin from "../pages/Employee/EmployeeLogin";
-import AboutUs from "../pages/Administrator/AboutUS";
 
 
 
@@ -46,7 +47,7 @@ const AppRoutes = () => {
 
       {/* Admin */}
       {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}
-      <Route path="/about-us" element={<AdminDashboard />} />
+      <Route path="/about-us" element={<AboutUs />} />
       <Route path="/add-hr" element={<AddHr />} />
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
@@ -67,7 +68,7 @@ const AppRoutes = () => {
       
       {/* root paths  */}
       {/* <Route path="/" element={<AdminDashboard />} /> */}
-      <Route path="/" element={<EmployeeLogin />} />
+      <Route path="/" element={<LeaveReorting />} />
 
     </Routes>
   );

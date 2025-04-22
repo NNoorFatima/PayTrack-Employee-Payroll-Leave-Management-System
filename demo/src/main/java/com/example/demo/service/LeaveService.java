@@ -59,11 +59,6 @@ public class LeaveService {
         leaveRepository.deleteById(id);
     }
 
-
-    // public int countApprovedLeaves(int userId) {
-    //     return leaveRepository.countByUserIdAndStatus(userId, "Approved");
-    // }
-
     public List<Leave> getApprovedLeavesByUserId(int userId) {
         return leaveRepository.findByUserIdAndStatus(userId, "Approved");
     }
