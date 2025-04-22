@@ -3,6 +3,7 @@
     margin :0 0;
     display: flex;
     flex-direction: column;
+    
   }
   
   button:hover {
@@ -10,10 +11,12 @@
     color: #fff;
   }
   .leave-request-form-container {
-    background-color: #f7f7f7;
-    background-image: linear-gradient(to bottom, #9fb9c7, #a0bebd);
-    padding: 15px;
-    border-radius: 8px;
+    background: rgba(86, 86, 86, 0.3); /* Light frosted glass effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px; /* 👈 Rounded corners */
+  padding: 30px; /* Optional: adds spacing inside */
+    /* border-radius: 8px; */
     width: 150%;
     margin-bottom: 10rem;
     /* margin: 0 auto; */

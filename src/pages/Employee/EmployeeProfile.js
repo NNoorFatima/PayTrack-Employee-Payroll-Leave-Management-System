@@ -53,6 +53,7 @@ const EmployeeProfilePage = () => {
   
   return (
     <Layout>
+      <div className="thisOne">
       <div className="content-section1">
         <h1 className="profile-title">Employee Profile</h1>
         <div className="profile-item">
@@ -74,6 +75,7 @@ const EmployeeProfilePage = () => {
         >
           Change Password
         </button>
+      </div>
       </div>
     </Layout>
   );
