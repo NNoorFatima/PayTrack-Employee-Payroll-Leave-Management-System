@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
-import './EmployeeSidebar.css'; // Sidebar styling
+import './Admin.css'; // Sidebar styling
 
 const Sidebar = () => {
   const navigate = useNavigate(); // Initialize navigate function

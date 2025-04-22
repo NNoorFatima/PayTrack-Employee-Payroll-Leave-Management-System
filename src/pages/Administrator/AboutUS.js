@@ -1,18 +1,21 @@
 import React from "react";
 import AdminLayout from "../../components/AdminLayout"; // Use the AdminLayout for structure
 import AdminSidebar from "../../components/AdminSidebar"; // Sidebar for navigation
-import "./Admin.css"; // Page-specific styles
+import "./abt.css"; // Page-specific styles
 
 const AboutUs = () => {
   return (
     <AdminLayout>
-      <div className="admin-dashboard-container">
+      <div className="admin-dashboard-containerq">
         {/* Sidebar for navigation */}
         
 
         {/* Main content */}
-        <div className="admin-content"> {/* Restoring the admin-content class */}
+        <div className="admin-contentw"> {/* Restoring the admin-content class */}
           <div className="about-us-box">
+            <h1>...
+              ...
+            </h1>
             <h1>About Us</h1>
 
             <h2>Our Mission</h2>

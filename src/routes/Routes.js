@@ -64,7 +64,7 @@ const AppRoutes = () => {
       
       
       {/* root paths  */}
-      <Route path="/" element={<ManagerLogin />} />
+      <Route path="/" element={<AdminDashboard />} />
       {/* <Route path="/" element={<EmployeeLogin />} /> */}
 
     </Routes>
