@@ -16,6 +16,7 @@ import AddManager from "../pages/Administrator/AddManager";
 import RemoveHr from "../pages/Administrator/RemoveHR";
 import RemoveManager from "../pages/Administrator/RemoveManager";
 import AdminLogin from "../pages/Administrator/AdminLogin";
+import AdmLogin from "../pages/Administrator/Login";
 
 import HREmpRemoval from "../pages/HR/HREmpRemoval";
 
@@ -24,6 +25,7 @@ import ManagerLogin from "../pages/Manager/ManagerLogin";
 import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
 
 import EmployeeLogin from "../pages/Employee/EmployeeLogin";
+import AboutUs from "../pages/Administrator/AboutUS";
 
 
 
@@ -49,7 +51,7 @@ const AppRoutes = () => {
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
-      <Route path="/loginAdmin" element={<AdminLogin />} />
+      <Route path="/login-admin" element={<AdmLogin />} />
 
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
@@ -64,8 +66,8 @@ const AppRoutes = () => {
       
       
       {/* root paths  */}
-      <Route path="/" element={<AdminDashboard />} />
-      {/* <Route path="/" element={<EmployeeLogin />} /> */}
+      {/* <Route path="/" element={<AdminDashboard />} /> */}
+      <Route path="/" element={<AdmLogin />} />
 
     </Routes>
   );
