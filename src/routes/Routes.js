@@ -57,7 +57,7 @@ const AppRoutes = () => {
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
       <Route path="/emp-removal" element={<HREmpRemoval />} />
-      <Route path="/hr-leave-reporting" element={<LeaveReorting />} />
+      <Route path="/leave-reports" element={<LeaveReorting />} />
 
       {/* Manager */}
       <Route path="/manager-dashboard" element={<Dashboard />} />     

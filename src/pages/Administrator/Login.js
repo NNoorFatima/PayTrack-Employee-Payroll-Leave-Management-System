@@ -44,6 +44,9 @@ const AdminLogin = () => {
 
   return (
     <div className="login-container">
+      <button className="back-button" onClick={() => navigate('/')}>
+        ⏮️Back
+      </button>
       <div className="login-form-wrapper">
         <h1>Admin Login</h1>
 

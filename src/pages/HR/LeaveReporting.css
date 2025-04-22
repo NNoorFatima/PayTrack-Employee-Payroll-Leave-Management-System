@@ -29,9 +29,9 @@
   }
   
   .leave-reporting-table th {
-    background-color: #4CAF50;
+    background-color: #e7b52e;
     color: white;
-    font-size: 18px;
+    font-size: 12px;
   }
   
   .leave-reporting-table tr:nth-child(even) {
@@ -43,7 +43,7 @@
   }
   
   .leave-reporting-table td {
-    font-size: 16px;
+    font-size: 12px;
     color: #333;
   }
   

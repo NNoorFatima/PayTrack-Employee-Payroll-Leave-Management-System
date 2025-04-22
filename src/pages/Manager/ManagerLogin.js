@@ -75,6 +75,9 @@ const ManagerLogin = () => {
 
   return (
     <div className="login-container"> {/* Background image wrapper */}
+    <button className="back-button" onClick={() => navigate('/')}>
+        ⏮️Back
+      </button>
       <div className="wrapper"> {/* Frosted-glass effect */}
         <form onSubmit={handleLogin}>
           <h1>Manager Login</h1>

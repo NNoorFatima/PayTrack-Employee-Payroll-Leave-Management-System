@@ -35,7 +35,7 @@ return (
       {/* Display error message if request fails */}
     {error && <p className="error-message">{error}</p>}
 
-      <table className="leave-reporting-table">
+      {/* <table className="leave-reporting-table">
         <thead>
           <tr>
             <th>Employee</th>
@@ -56,7 +56,7 @@ return (
             </tr>
           )}
         </tbody>
-      </table>
+      </table> */}
 
       <div className="chart-container">
         <h2>Total Leaves per Employee</h2>
