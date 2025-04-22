@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
 import "./Login2.css"; // Import the CSS file for styling
+import { useNavigate } from "react-router-dom"; // To navigate after successful login
 
 const AdminLogin = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,11 +18,29 @@ const AdminLogin = () => {
   };
 
   // Handle login form submission
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    alert("Login successful!");
-    // Add login validation and navigation logic here
-  };
+
+    const response = await fetch(`http://localhost:8080/admins/login?name=${formData.username}&password=${formData.password}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",  // Optional for query params, but included for consistency
+      },
+    });
+
+    // Use text() instead of json() as the response is plain text
+    const result = await response.text(); 
+
+    if (response.ok) {
+      alert(result);  // Show the plain text message from the backend
+      navigate("/about-us");  // Redirect after successful login
+    } else {
+      alert(result || "Login failed");  // Display error message if the login failed
+    }
+};
+
+
+  
 
   return (
     <div className="login-container">

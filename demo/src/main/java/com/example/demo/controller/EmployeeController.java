@@ -97,37 +97,37 @@ public class EmployeeController {
     }
 
      // Login endpoint for employees
-     @PostMapping("/login")
-     public ResponseEntity<?> loginEmployee(@RequestBody Map<String, String> loginData) {
-         String username = loginData.get("username");
-         String password = loginData.get("password");
- 
-         if (!userService.validateCredentials(username, password)) {
-             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    @PostMapping("/login")
+    public ResponseEntity<?> loginEmployee(@RequestBody Map<String, String> loginData) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+
+        if (!userService.validateCredentials(username, password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                      .body("Incorrect username or password");
-         }
- 
-         User user = userService.findByName(username);
-         if (user == null) {
-             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                     .body("User not found");
-         }
- 
+        }
+
+        User user = userService.findByName(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("User not found");
+        }
+
         Employee employee = employeeService.getEmployeeById(user.getUserid());
         if (employee == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("User is not an employee");
         }
- 
+
         Map<String, Object> response = new HashMap<>();
         response.put("employeeId", employee.getUserid());
         response.put("username", user.getName());
         response.put("userId", user.getUserid());
         response.put("departmentId", employee.getDeptid());
- 
+
         return ResponseEntity.ok(response);
-     }
- 
+    }
+
     
 
 

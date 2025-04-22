@@ -123,4 +123,19 @@ public class AdminController {
         }
     }
 
+
+    @PostMapping("/login")
+    public String login(@RequestParam String name, @RequestParam String password) {
+        System.out.println("Name: " + name + ", Password: " + password);
+        boolean isValid = userService.validateCredentials(name, password);
+        if (isValid) {
+            return "Login successful!";  // Plain text response
+        } else {
+            return "Invalid credentials or not an admin.";  // Plain text error response
+        }
+    }
+
+
+
+
 }
