@@ -27,7 +27,7 @@ import Dashboard from "../pages/Manager/HomePage";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
 import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
 
-
+import Interface from "../pages/InterfaceSelector/Interface";
 
 
 const AppRoutes = () => {
@@ -57,7 +57,7 @@ const AppRoutes = () => {
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
       <Route path="/emp-removal" element={<HREmpRemoval />} />
-
+      <Route path="/hr-leave-reporting" element={<LeaveReorting />} />
 
       {/* Manager */}
       <Route path="/manager-dashboard" element={<Dashboard />} />     
@@ -68,7 +68,7 @@ const AppRoutes = () => {
       
       {/* root paths  */}
       {/* <Route path="/" element={<AdminDashboard />} /> */}
-      <Route path="/" element={<LeaveReorting />} />
+      <Route path="/" element={<Interface />} />
 
     </Routes>
   );
