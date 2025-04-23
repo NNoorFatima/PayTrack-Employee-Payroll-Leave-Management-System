@@ -23,7 +23,7 @@ import AboutUs from "../pages/Administrator/AboutUS";
 import HREmpRemoval from "../pages/HR/HREmpRemoval";
 import LeaveReorting from "../pages/HR/LeaveReporting";
 import ViewHR from "../pages/Administrator/ViewHR";
-
+import ViewManager from "../pages/Administrator/ViewManager";
 import Dashboard from "../pages/Manager/HomePage";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
 import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
@@ -54,7 +54,8 @@ const AppRoutes = () => {
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
       <Route path="/login-admin" element={<AdmLogin />} />
-      <Route path="/view-hr" element={<ViewHR />} />
+      <Route path="/admin-view-hr" element={<ViewHR />} />
+      <Route path="/admin-view-manager" element={<ViewManager />} />
 
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}

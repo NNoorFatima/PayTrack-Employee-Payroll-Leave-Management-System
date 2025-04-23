@@ -1,58 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HRCard from "./CardAdmin";
-import HRLayout from "../../components/HRLayout"
 import "./CardAdmin.css"; // Link to the CSS
-
-const fakeHRs = [
-  {
-    userid: "HR001",
-    name: "Priya Sharma",
-    deptid: "D001",
-    email: "priya.sharma@company.com",
-    dateofjoin: "2021-08-17",
-  },
-  {
-    userid: "HR002",
-    name: "Anil Kumar",
-    deptid: "D002",
-    email: "anil.kumar@company.com",
-    dateofjoin: "2019-05-02",
-  },
-  {
-    userid: "HR003",
-    name: "Meena Patel",
-    deptid: "D001",
-    email: "meena.patel@company.com",
-    dateofjoin: "2022-03-10",
-  },
-  {
-    userid: "HR004",
-    name: "Rahul Singh",
-    deptid: "D003",
-    email: "rahul.singh@company.com",
-    dateofjoin: "2020-11-23",
-  },
-  {
-    userid: "HR005",
-    name: "Neha Gupta",
-    deptid: "D002",
-    email: "neha.gupta@company.com",
-    dateofjoin: "2018-07-15",
-  },
-];
+import AdminLayout from "../../components/AdminLayout";
 
 const ViewHR = () => {
+  const [hrData, setHrData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // First fetch HR data from the backend API
+    fetch("http://localhost:8080/hrs")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch HR data");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Once HR data is fetched, we now fetch user data
+        const userIds = data.map((hr) => hr.userid).join(",");
+
+        // Fetch user data based on HR `userid` values
+        fetch(`http://localhost:8080/users?userids=${userIds}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to fetch user data");
+            }
+            return response.json();
+          })
+          .then((userData) => {
+            console.log("User Data:", userData);
+            // Merge HR data and user data based on `userid`
+            const mergedData = data.map((hr) => {
+              const user = userData.find((user) => user.userid === hr.userid);
+              return {
+                ...hr,
+                name: user ? user.name : "",
+                email: user ? user.email : "",
+                dateofjoin: user ? user.date_of_join : "",
+              };
+            });
+            setHrData(mergedData); // Set the merged data to the state
+            setLoading(false); // Set loading to false once data is fetched
+          })
+          .catch((error) => {
+            setError(error.message); // Set error message if user data fetch fails
+            setLoading(false); // Set loading to false in case of error
+          });
+      })
+      .catch((error) => {
+        setError(error.message); // Set error message if HR data fetch fails
+        setLoading(false); // Set loading to false even in case of error
+      });
+  }, []); // Empty dependency array ensures this effect runs once when the component mounts
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <HRLayout>
-    <div className="view-hr-container">
-      <h1 className="view-hr-title">HR Personnel Directory</h1>
-      <div className="hr-grid">
-        {fakeHRs.map((hr) => (
-          <HRCard key={hr.userid} hr={hr} />
-        ))}
+    <AdminLayout>
+      <div className="view-hr-container">
+        <h1 className="view-hr-title">HR Personnel Directory</h1>
+        <div className="hr-grid">
+          {hrData.map((hr) => (
+            <HRCard key={hr.userid} hr={hr} />
+          ))}
+        </div>
       </div>
-    </div>
-    </HRLayout>
+    </AdminLayout>
   );
 };
 

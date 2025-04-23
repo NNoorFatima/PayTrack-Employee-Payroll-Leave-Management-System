@@ -12,7 +12,8 @@ const AdminLayout = ({ children }) => {
         <header className="top-nav">
           <div className="nav-left"></div>
           <div className="nav-right">
-            <a href="#" className="nav-link">Profile</a>
+            {/* <a href="#" className="nav-link">Profile</a> */}
+            <Link to="/about-us" className="nav-link">About Us</Link>
             <Link to="/login-admin" className="nav-link logout-btn">Logout</Link>
           </div>
         </header>
