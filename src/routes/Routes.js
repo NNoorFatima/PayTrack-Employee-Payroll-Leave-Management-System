@@ -24,7 +24,6 @@ import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrent
 
 import EmployeeLogin from "../pages/Employee/EmployeeLogin";
 
-import HRLogin from "../pages/HR/HRLogin"; 
 
 
 const AppRoutes = () => {
@@ -42,6 +41,8 @@ const AppRoutes = () => {
       <Route path="/change-password" element={<ChangePasswordPage />} />
 
 
+      <Route path="/" element={<EmployeeLogin />} />
+
       {/* Admin */}
       {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}
       <Route path="/about-us" element={<AdminDashboard />} />
@@ -49,8 +50,7 @@ const AppRoutes = () => {
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
-      <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/HR-login" element={<HRLogin />} />
+      {/* <Route path="/" element={<AdminLogin />} /> */}
 
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
@@ -67,12 +67,6 @@ const AppRoutes = () => {
       {/* root paths  */}
       {/* <Route path="/" element={<ManagerLogin />} /> */}
       {/* <Route path="/" element={<EmployeeLogin />} /> */}
-      {/* <Route path="/" element={<AdminDashboard />} /> */}
-
-
-      {/* <Route path="/" element={<AdminLogin />} /> */}
-      <Route path="/" element={<HRLogin />} />
-
 
     </Routes>
   );

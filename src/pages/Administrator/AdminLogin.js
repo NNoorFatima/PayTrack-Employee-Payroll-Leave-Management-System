@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
-// import "../../App.css";
+import "../../App.css";
 
-import "./LoginForm.css"; // Updated CSS for the frosted-glass effect
+// import "./LoginForm.css"; // Updated CSS for the frosted-glass effect
 
 
 const AdminLogin = () => {
@@ -18,52 +18,40 @@ const AdminLogin = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-  
+    // Username should only contain letters & numbers (no special characters)
+    if (name === "username" && !/^[A-Za-z0-9]*$/.test(value)) {
+      alert("Username can only contain letters and numbers.");
+      return;
+    }
 
     setFormData({ ...formData, [name]: value });
   };
 
   // Handle login form submission
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
 
-    // alert("Login successful! Redirecting to admin Dashboard...");
-    try {
-      // Make an API call to check if the user exists and the password is correct
-      const response = await fetch("http://localhost:8080/admins/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      // Check if the response is OK (user exists and password is correct)
-      if (response.ok) {
-        // Logic: parse the response and store the user ID for future API calls
-        const data = await response.json();
-        console.log(data);
-        localStorage.setItem("userId", data.userId) ; 
-
-        console.log("User ID:", data.userId);
-
-        navigate("/about-us");
-      } else {
-        // If not OK, display an alert with an error message
-        alert("Incorrect username or password.");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      alert("An error occurred during login. Please try again.");
+    // Validate Username (Only Letters & Numbers)
+    if (!/^[A-Za-z0-9]+$/.test(formData.username)) {
+      alert("Username should only contain letters and numbers.");
+      return;
     }
-    
+
+    // Validate Password (Min 8 Characters, 1 Letter, 1 Number, 1 Symbol)
+    if (!/(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(formData.password)) {
+      alert("Password must be at least 8 characters long and contain a letter, a number, and a special character.");
+      return;
+    }
+
+    alert("Login successful! Redirecting to About Us...");
+    navigate("/about-us");
   };
 
   return (
     <div className="login-container"> {/* Background image wrapper */}
       <div className="wrapper"> {/* Frosted-glass effect */}
         <form onSubmit={handleLogin}>
-          <h1>Admin Login</h1>
+          <h1>Login</h1>
 
           <div className="input-box">
             <input
@@ -98,22 +86,11 @@ const AdminLogin = () => {
 
           <div className="spacer"></div> {/* Adjust spacing */}
           <button type="submit">Login</button>
+          
         </form>
       </div>
     </div>
   );
 };
 
-
 export default AdminLogin;
-
-
-
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { FaUser, FaLock } from "react-icons/fa";
-// import "./LoginForm.css"; // Updated CSS for the frosted-glass effect
-
-
-
-// export default EmployeeLogin;
