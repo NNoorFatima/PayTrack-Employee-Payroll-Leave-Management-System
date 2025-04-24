@@ -1,11 +1,15 @@
 /* Profile.css */
 .Profile-section {
-  background: transparent;
+  /* background: transparent; */
+  background: rgba(86, 86, 86, 0.1); /* Light frosted glass effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 40px;
   margin: 20px auto;
   width: 90%;
   max-width: 600px;
-  min-width: 400px;
+  min-width: 500px;
+  margin-left: 100px;
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.1);
   font-family: Arial, sans-serif;
@@ -41,6 +45,7 @@
 /* Center the title text */
 .profile-title {
     text-align: center;
+    margin-left: 170px;
 
     margin-top: -200px;    /* move up by 10px */
     margin-bottom: 20px;  /* optional spacing below */

@@ -11,7 +11,7 @@ const Profile = () => {
     if (!userId) return;
 
     // Fetch employee details first
-    fetch(`http://localhost:8080/employees/${userId}`)
+    fetch(`http://localhost:8080/managers/${userId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch employee data");
         return res.json();

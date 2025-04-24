@@ -67,7 +67,7 @@
   background: rgba(86, 86, 86, 0.3); /* Light frosted glass effect */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px; /* 👈 Rounded corners */
+  border-radius: 20px; /*  Rounded corners */
   padding: 60px; /* Optional: adds spacing inside */
   max-width: 600px;
   width: 400px;
