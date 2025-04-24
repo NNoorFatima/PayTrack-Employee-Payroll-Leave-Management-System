@@ -46,7 +46,7 @@ const AppRoutes = () => {
       <Route path="/change-password" element={<ChangePasswordPage />} />
 
 
-      <Route path="/" element={<EmployeeLogin />} />
+      {/* <Route path="/" element={<EmployeeLogin />} /> */}
 
       {/* Admin */}
       {/* <Route path="/" element={<AdminDashboard />} /> ✅ Default page is now Admin.js */}

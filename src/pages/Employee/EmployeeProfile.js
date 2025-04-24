@@ -55,17 +55,17 @@ const EmployeeProfilePage = () => {
     <Layout>
       <div className="thisOne">
       <div className="content-section1">
-        <h1 className="profile-title">Employee Profile</h1>
-        <div className="profile-item">
+        <h1 >Employee Profile</h1>
+        <div >
           <strong>Name:</strong> {user.name}
         </div>
-        <div className="profile-item">
+        <div >
           <strong>Email:</strong> {user.email}
         </div>
-        <div className="profile-item">
+        <div >
           <strong>Salary:</strong> {employee.salary}
         </div>
-        <div className="profile-item">
+        <div >
           <strong>Department:</strong> {employee.deptid}
         </div>
         
