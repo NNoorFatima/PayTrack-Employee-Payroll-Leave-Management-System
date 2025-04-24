@@ -1,14 +1,35 @@
 .report-container {
     background: transparent;
     padding: 30px;
-    margin: 40px auto;
+    margin: 20px auto;
+
+    width: 90%;
+    max-width: 800px;
+    min-width: 600px;
+    
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+
+
+  }
+
+
+   .Reports-section h1 {
+   margin-top: 60px;
+   } 
+  
+
+  /* .report-container {
+    background: transparent;
+    padding: 30px;
+    // move it up by reducing/negating the top margin:
+    margin: -200px auto 20px;
     width: 90%;
     max-width: 800px;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  
-
   }
+   */
   
   .report-container h1 {
     font-size: 2rem;
