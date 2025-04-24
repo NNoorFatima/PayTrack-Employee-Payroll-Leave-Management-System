@@ -19,14 +19,16 @@ import RemoveManager from "../pages/Administrator/RemoveManager";
 import AdminLogin from "../pages/Administrator/AdminLogin";
 import AdmLogin from "../pages/Administrator/Login";
 import AboutUs from "../pages/Administrator/AboutUS";
-
-import HREmpRemoval from "../pages/HR/HREmpRemoval";
-import LeaveReorting from "../pages/HR/LeaveReporting";
 import ViewHR from "../pages/Administrator/ViewHR";
 import ViewManager from "../pages/Administrator/ViewManager";
+
+import HRLogin from "../pages/HR/HRLogin";
+import HREmpRemoval from "../pages/HR/HREmpRemoval";
+import LeaveReorting from "../pages/HR/LeaveReporting";
+
 import Dashboard from "../pages/Manager/HomePage";
 import ManagerLogin from "../pages/Manager/ManagerLogin";
-import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
+// import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrently 
 
 import Interface from "../pages/InterfaceSelector/Interface";
 
@@ -63,6 +65,7 @@ const AppRoutes = () => {
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
       <Route path="/emp-removal" element={<HREmpRemoval />} />
       <Route path="/leave-reports" element={<LeaveReorting />} />
+      <Route path="/login-hr" element={<HRLogin />} />
 
       {/* Manager */}
       <Route path="/manager-dashboard" element={<Dashboard />} />     

@@ -11,7 +11,7 @@ const Interface = () => {
         navigate("/login-admin");
         break;
       case "HR":
-        navigate("/emp-removal"); //ye theek karlena
+        navigate("/login-hr"); //fixed
         break;
       case "Manager":
         navigate("/manager-login");

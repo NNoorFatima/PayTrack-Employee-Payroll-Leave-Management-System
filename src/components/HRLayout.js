@@ -19,8 +19,8 @@ const HRLayout = ({ children }) => {
             
           </div>
           <div className="nav-right">
-            <a href="#" className="nav-link">Profile</a>
-            <Link to="/loginEmp" className="nav-link logout-btn">Logout</Link> 
+            {/* <a href="#" className="nav-link">Profile</a> */}
+            <Link to="/login-hr" className="nav-link logout-btn">Logout</Link> 
             {/* change to HR login  */}
           </div>
         </header>
