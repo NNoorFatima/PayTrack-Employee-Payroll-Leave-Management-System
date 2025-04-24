@@ -69,6 +69,18 @@ public class LeaveService {
     public List<Leave> getAllStatusLeave(int userId, String status) {
         return leaveRepository.findByUserIdAndStatus(userId, status);  // Pass status dynamically
     }
+
+    
+    public List<Object[]> getLeavesWithUserNameByDeptAndStatus(int deptId, String status) {
+        return leaveRepository.findLeavesWithUserNameByDeptAndStatus(deptId, status);
+    }
+    
+
+    public List<Leave> getLeavesByUserMonthYear(int userId, int month, int year) {
+        return leaveRepository.findByUserIdAndMonthAndYear(userId, month, year);
+    }
+    
+  
     
 
 
