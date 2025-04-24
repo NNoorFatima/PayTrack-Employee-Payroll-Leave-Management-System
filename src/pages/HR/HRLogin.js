@@ -30,7 +30,7 @@ const HRLogin = () => {
     // alert("Login successful! Redirecting to admin Dashboard...");
     try {
       // Make an API call to check if the user exists and the password is correct
-      const response = await fetch("http://localhost:8080/admins/login", {
+      const response = await fetch("http://localhost:8080/hrs/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const HRLogin = () => {
         console.log(data);
         localStorage.setItem("userId", data.userId) ; 
 
-        // localStorage.setItem("departmentId", data.departmentId); 
+        localStorage.setItem("departmentId", data.departmentId); 
         
 
         console.log("User ID:", data.userId);

@@ -3,12 +3,16 @@ package com.example.demo.controller;
 import com.example.demo.model.HR;
 import com.example.demo.model.User;
 import com.example.demo.service.HRService;
+import com.example.demo.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -17,6 +21,11 @@ public class HRController {
 
     @Autowired
     private HRService hrService;
+
+
+
+    @Autowired
+    private UserService userService;
 
     // GET /hrs - Retrieve all HR records (user data is not included due to
     // @JsonIgnore)
@@ -76,6 +85,43 @@ public class HRController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("HR or User not found.");
         }
+    }
+
+
+      /** POST /hrs/login */
+    @PostMapping("/login")
+    public ResponseEntity<?> loginHR(@RequestBody Map<String,String> loginData) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+
+        // 1) validate username/password
+        if (!userService.validateCredentials(username, password)) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body("Incorrect username or password");
+        }
+
+        // 2) load the User entity
+        User user = userService.findByName(username);
+        if (user == null) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body("User not found");
+        }
+
+        // 3) load the HR record by that userId
+        HR hr = hrService.getHRById(user.getUserid());
+        if (hr == null) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body("User is not an HR");
+        }
+
+        // 4) build response payload
+        Map<String,Object> resp = new HashMap<>();
+        resp.put("hrId",         hr.getUserid());
+        resp.put("username",     user.getName());
+        resp.put("userId",       user.getUserid());
+        resp.put("departmentId", hr.getDeptid());
+
+        return ResponseEntity.ok(resp);
     }
 
 }
