@@ -17,20 +17,28 @@ const RemoveEmpForm = () => {
   const [selectedEmp, setSelectedEmp] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [userList, setUserList] = useState([]);
 
   // Fetch HR data from backend
   const fetchEmployees = () => {
     fetch("http://localhost:8080/employees")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched employees:", data);
-        setEmpList(data);
+      .then((res) => res.json())
+      .then((empData) => {
+        setEmpList(empData);
+  
+        // Fetch users after employees are fetched
+        return fetch("http://localhost:8080/users");
+      })
+      .then((res) => res.json())
+      .then((userData) => {
+        setUserList(userData);
       })
       .catch((error) => {
-        console.error("Error fetching employees:", error);
-        setError("Failed to load employees");
+        console.error("Error fetching data:", error);
+        setError("Failed to load employees or users");
       });
   };
+  
 
   useEffect(() => {
     fetchEmployees();
@@ -89,11 +97,27 @@ const RemoveEmpForm = () => {
           onChange={(e) => setSelectedEmp(e.target.value)}
         >
           <option value="">Select Employee</option>
-          {empList.map((Emp) => (
+          {/* {empList.map((Emp) => (
             <option key={Emp.userid} value={Emp.userid}>
               {Emp.userid} {Emp.user && Emp.user.name ? `- ${Emp.user.name}` : ""}
             </option>
-          ))}
+          ))} */}
+          {/* {empList.map((Emp) => (
+            <option key={Emp.userid} value={Emp.userid}>
+              {"ID: "+Emp.userid} - {"Salary: "+Emp.salary || "0"}
+            </option>
+          ))} */}
+          {empList.map((emp) => {
+            const matchedUser = userList.find((user) => user.userid === emp.userid);
+            console.log("matchedUser:", matchedUser);
+            return (
+              <option key={emp.userid} value={emp.userid}>
+                {"ID: " + emp.userid} --- {"Name: " + (matchedUser?.name || "No Email")} --- {"Salary: " + (emp.salary || "0")}
+              </option>
+
+            );
+          })}
+
         </select>
 
         <button type="submit" className="submit-btn" disabled={loading}>
