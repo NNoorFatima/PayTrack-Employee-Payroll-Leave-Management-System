@@ -24,6 +24,7 @@ import ListEmployees from "../pages/Manager/ListEmployees"; // not in use crrent
 
 import EmployeeLogin from "../pages/Employee/EmployeeLogin";
 
+import HRLogin from "../pages/HR/HRLogin"; 
 
 
 const AppRoutes = () => {
@@ -48,7 +49,8 @@ const AppRoutes = () => {
       <Route path="/add-manager" element={<AddManager />} />
       <Route path="/remove-hr" element={<RemoveHr />} />
       <Route path="/remove-manager" element={<RemoveManager />} />
-      <Route path="/loginAdmin" element={<AdminLogin />} />
+      <Route path="/admin-login" element={<AdminLogin />} />
+      <Route path="/HR-login" element={<HRLogin />} />
 
       {/* HR */}
       {/* <Route path="/" element={<HREmpRemoval />} /> */}
@@ -57,14 +59,20 @@ const AppRoutes = () => {
 
       {/* Manager */}
       <Route path="/manager-dashboard" element={<Dashboard />} />     
-      <Route path="/list-employees" element={<ListEmployees />} />
+      {/* <Route path="/list-employees" element={<ListEmployees />} /> */}
       {/* <Route path="/" element={<ManagerLogin />} /> */}
       <Route path="/manager-login" element={<ManagerLogin />} />
       
       
       {/* root paths  */}
-      <Route path="/" element={<ManagerLogin />} />
+      {/* <Route path="/" element={<ManagerLogin />} /> */}
       {/* <Route path="/" element={<EmployeeLogin />} /> */}
+      {/* <Route path="/" element={<AdminDashboard />} /> */}
+
+
+      {/* <Route path="/" element={<AdminLogin />} /> */}
+      <Route path="/" element={<HRLogin />} />
+
 
     </Routes>
   );

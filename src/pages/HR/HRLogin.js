@@ -6,7 +6,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 import "./LoginForm.css"; // Updated CSS for the frosted-glass effect
 
 
-const AdminLogin = () => {
+const HRLogin = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -45,6 +45,9 @@ const AdminLogin = () => {
         console.log(data);
         localStorage.setItem("userId", data.userId) ; 
 
+        // localStorage.setItem("departmentId", data.departmentId); 
+        
+
         console.log("User ID:", data.userId);
 
         navigate("/about-us");
@@ -63,7 +66,7 @@ const AdminLogin = () => {
     <div className="login-container"> {/* Background image wrapper */}
       <div className="wrapper"> {/* Frosted-glass effect */}
         <form onSubmit={handleLogin}>
-          <h1>Admin Login</h1>
+          <h1>HR Login</h1>
 
           <div className="input-box">
             <input
@@ -105,7 +108,7 @@ const AdminLogin = () => {
 };
 
 
-export default AdminLogin;
+export default HRLogin;
 
 
 
