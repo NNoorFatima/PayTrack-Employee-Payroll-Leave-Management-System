@@ -113,7 +113,21 @@ public class LeaveController {
     // example : curl -X GET "http://localhost:8080/leaves/byUserAndMonthYear?userId=1&month=1&year=2024"
 
     
-
+    @GetMapping("/byUserAndMonthYear/count")
+    public ResponseEntity<Long> getApprovedLeaveCountByUserMonthYear(
+        @RequestParam int userId,
+        @RequestParam int month,
+        @RequestParam int year
+    ) {
+        long count = leaveService.getApprovedLeaveCount(userId, month, year);
+        if (count == 0) {
+            // 204 No Content if none approved
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(count);
+    } 
+    // example :- 
+    // curl -X GET "http://localhost:8080/leaves/byUserAndMonthYear/count?userId=1&month=5&year=2024" 
 
 
 

@@ -1,3 +1,4 @@
+com\example\demo\controller\HRController$LeaveCountDTO.class
 com\example\demo\DemoApplication.class
 com\example\demo\model\Admin.class
 com\example\demo\repository\DepartmentRepository.class
