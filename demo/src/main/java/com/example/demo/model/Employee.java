@@ -53,6 +53,10 @@ public class Employee {
         return user;
     }
 
+    //added setUser here
+    public void setUser(User user) {
+        this.user= user;
+    }
 
 
 }
