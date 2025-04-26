@@ -112,7 +112,7 @@ const RemoveEmpForm = () => {
             console.log("matchedUser:", matchedUser);
             return (
               <option key={emp.userid} value={emp.userid}>
-                {"ID: " + emp.userid} --- {"Name: " + (matchedUser?.name || "No Email")} --- {"Salary: " + (emp.salary || "0")}
+                {"ID: " + emp.userid} --- {"Name: " + (matchedUser?.name || "No Name")} --- {"Salary: " + (emp.salary || "0")}
               </option>
 
             );

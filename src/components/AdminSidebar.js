@@ -18,7 +18,7 @@ const Sidebar = () => {
         <li><button onClick={() => navigate("/add-manager")}>💼 Add Manager</button></li>
         <li><button onClick={() => navigate("/remove-manager")}>🐥 Remove Manager</button></li>
         <li><button onClick={() => navigate("/admin-view-hr")}>🧑‍💼 View HR</button></li>
-        <li><button onClick={() => navigate("/admin-view-manager")}>👩‍💻 View HR</button></li>
+        <li><button onClick={() => navigate("/admin-view-manager")}>👩‍💻 View Manager</button></li>
         {/* Uncomment for Logout functionality if needed */}
         {/* <li style={{ marginTop: "auto" }}>
           <button className="logout-btn" onClick={() => navigate("/LoginAdmin")}>Logout</button>

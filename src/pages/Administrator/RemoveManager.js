@@ -18,14 +18,20 @@ const RemoveManagerForm = () => {
   const [selectedManager, setSelectedManager] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-
+  const [userList, setUserList] = useState([]);
   // Fetch manager list
   useEffect(() => {
     axios
       .get("http://localhost:8080/managers")
       .then((response) => {
         setManagers(response.data);
-      })
+      // Fetch users after employees are fetched
+      return fetch("http://localhost:8080/users");
+    })
+    .then((res) => res.json())
+    .then((userData) => {
+      setUserList(userData);
+    })
       .catch((error) => {
         console.error("Error fetching managers:", error);
       });
@@ -74,11 +80,21 @@ const RemoveManagerForm = () => {
   required
 >
   <option value="">Select Manager ID</option>
-  {managers.map((m) => (
+  {/* {managers.map((m) => (
     <option key={m.userid} value={m.userid}>
       {m.userid}
     </option>
-  ))}
+  ))} */}
+  {managers.map((m) => {
+            const matchedUser = userList.find((user) => user.userid === m.userid);
+            console.log("matchedUser:", matchedUser);
+            return (
+              <option key={m.userid} value={m.userid}>
+                {"ID: " + m.userid} --- {"Name: " + (matchedUser?.name || "No name")} --- {"Salary: " + (matchedUser?.email || "No Email")}
+              </option>
+
+            );
+    })}
 </select>
 
         <button type="submit" className="submit-btn" disabled={loading}>

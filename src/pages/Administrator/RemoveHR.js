@@ -17,6 +17,7 @@ const RemoveHRForm = () => {
   const [selectedHR, setSelectedHR] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [userList, setUserList] = useState([]);
 
   // Fetch HR data from backend
   const fetchHRs = () => {
@@ -25,6 +26,13 @@ const RemoveHRForm = () => {
       .then((data) => {
         console.log("Fetched HRs:", data);
         setHrList(data);
+        console.log("HR List:", hrList);
+        return fetch("http://localhost:8080/users");
+      })
+      .then((res) => res.json())
+      .then((userData) => {
+        setUserList(userData);
+        console.log("Fetched Users:", userData);
       })
       .catch((error) => {
         console.error("Error fetching HRs:", error);
@@ -76,11 +84,21 @@ const RemoveHRForm = () => {
           onChange={(e) => setSelectedHR(e.target.value)}
         >
           <option value="">Select HR</option>
-          {hrList.map((hr) => (
+          {/* {hrList.map((hr) => (
             <option key={hr.userid} value={hr.userid}>
-              {hr.userid} {hr.user && hr.user.name ? `- ${hr.user.name}` : ""}
+              {hr.userid} -- {hr.email}{hr.user && hr.user.name ? `- ${hr.user.name}` : ""}
             </option>
-          ))}
+          ))} */}
+          {hrList.map((hr) => {
+            const matchedUser = userList.find((user) => user.userid === hr.userid);
+            console.log("matchedUser:", matchedUser);
+            return (
+              <option key={hr.userid} value={hr.userid}>
+                {"ID: " + hr.userid} --- {"Name: " + (matchedUser?.name || "No name")} --- {"Salary: " + (matchedUser?.email || "No Email")}
+              </option>
+
+            );
+          })}
         </select>
 
         <button type="submit" className="submit-btn" disabled={loading}>
