@@ -238,4 +238,47 @@ public class AdminControllerTest {
         assertEquals("Invalid credentials or not an admin.", response);
     }
 
+    @Test
+    void testGetUserDataByAdminId_Done() {
+        int id = 1;
+
+        // Mock the adminService to return an Admin object
+        Admin admin = new Admin();
+        User user = new User();
+        admin.setUser(user);
+        when(adminService.getAdminById(id)).thenReturn(admin);
+
+        ResponseEntity<User> response = adminController.getUserDataByAdminId(id);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertNotNull(response.getBody());
+        assertEquals(user, response.getBody());
+    }
+
+    @Test
+    void testGetUserDataByAdminId_AdminNotFound() {
+        int id = 1;
+
+        // Mock the adminService to return null
+        when(adminService.getAdminById(id)).thenReturn(null);
+
+        ResponseEntity<User> response = adminController.getUserDataByAdminId(id);
+
+        assertEquals(404, response.getStatusCodeValue());
+        assertNull(response.getBody());
+    }
+
+    @Test
+    void testGetUserDataByAdminId_UserNotFound() {
+        int id = 1;
+
+        // Mock the adminService to return an Admin object with no User
+        Admin admin = new Admin();
+        when(adminService.getAdminById(id)).thenReturn(admin);
+
+        ResponseEntity<User> response = adminController.getUserDataByAdminId(id);
+
+        assertEquals(404, response.getStatusCodeValue());
+        assertNull(response.getBody());
+    }
 }
