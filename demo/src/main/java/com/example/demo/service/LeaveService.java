@@ -79,6 +79,13 @@ public class LeaveService {
     public List<Leave> getLeavesByUserMonthYear(int userId, int month, int year) {
         return leaveRepository.findByUserIdAndMonthAndYear(userId, month, year);
     }
+
+    // * Return the count of leaves with status="Approved" 
+    // * for a given user in the given month & year.
+    public long getApprovedLeaveCount(int userId, int month, int year) {
+        return leaveRepository
+                 .countByUserIdAndStatusAndMonthAndYear(userId, "Approved", month, year);
+      }
     
   
     

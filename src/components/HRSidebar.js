@@ -13,6 +13,9 @@ const HRSidebar = () => {
         <li><button onClick={() => navigate("/payroll-processing")}>🏠 Payroll Processing</button></li>
         <li><button onClick={() => navigate("/emp-removal")}>📝Employee Removal</button></li>
         <li><button onClick={() => navigate("/leave-reports")}>💼 Leave Reports</button></li>
+        <li><button onClick={() => navigate("/add-emp")}>🧑 Add Employee</button></li>
+        
+
         {/* Uncomment for Logout functionality if needed */}
         {/* <li style={{ marginTop: "auto" }}>
           <button className="logout-btn" onClick={() => navigate("/eLoginForm")}>Logout</button>
