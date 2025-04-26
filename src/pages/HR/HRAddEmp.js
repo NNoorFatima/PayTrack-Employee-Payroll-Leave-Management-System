@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+// src/pages/hr/HRAddEmp.jsx
+import React, { useState } from "react";
 import HRLayout from "../../components/HRLayout";
-import "./HRPayrollProcessing.css"; // Page-specific styles
+import "./HRAddEmp.css"; // Page-specific styles
+
+// at top of HRAddEmp.jsx
+import axios from "axios";
 
 
-function AddEmp () {
+function AddEmp() {
   return (
     <HRLayout>
-      <div>
+      <div className="add-emp-page">
+        <h2>Add New Employee</h2>
         <AddEmployeeForm />
       </div>
     </HRLayout>
@@ -14,167 +19,173 @@ function AddEmp () {
 }
 
 const AddEmployeeForm = () => {
-  const [empList, setEmpList] = useState([]);
-  const [userList, setUserList] = useState([]);
-
-  const [selectedEmp, setSelectedEmp] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-
-  const [baseSalary, setBaseSalary] = useState(null);
-  const [leaveCount, setLeaveCount] = useState(null);
-  const [netPay, setNetPay] = useState(null);
-
+  const [form, setForm] = useState({
+    name: "",
+    password: "",
+    gender: "Male",
+    email: "",
+    phone_no: "",
+    address: "",
+    date_of_join: "",
+    salary: "",
+    deptid: "",
+  });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState(null);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  // Fetch employees and users once
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const empRes = await fetch("http://localhost:8080/employees");
-        const empData = await empRes.json();
-        setEmpList(empData);
-        const userRes = await fetch("http://localhost:8080/users");
-        const userData = await userRes.json();
-        setUserList(userData);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        setError("Failed to load employees or users");
-      }
-    };
-    fetchEmployees();
-  }, []);
-
-  const handleCalculate = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-
-    if (!selectedEmp || !month || !year) {
-      setError("Please select employee, month and year");
-      return;
-    }
-
     setLoading(true);
-
+    setMessage(null);
     try {
-      // 1) fetch employee details to get base salary and date_of_joining
-      const empRes = await fetch(`http://localhost:8080/employees/${selectedEmp}`);
-      if (!empRes.ok) throw new Error("Failed to fetch employee");
-      const emp = await empRes.json();
-      const salary = emp.salary;
-      // const doj = new Date(emp.date_of_joining);
-      setBaseSalary(salary);
-
-      // 2) fetch user data to get dateOfJoining
-      const userRes = await fetch(`http://localhost:8080/employees/${selectedEmp}/user`);
-      if (!userRes.ok) throw new Error("Failed to fetch user data");
-      const user = await userRes.json();
-      const doj = new Date(user.date_of_join);
-
-      // alert(doj.toLocaleDateString());
+      // 1) Create the user
+      const userResponse = await fetch("/users/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          password: form.password,
+          gender: form.gender,
+          email: form.email,
+          phone_no: form.phone_no,
+          address: form.address,
+          date_of_join: form.date_of_join,
+        }),
+      });
   
+      if (!userResponse.ok) throw new Error("Failed to create user");
+      const { userid } = await userResponse.json();
 
-      // build selected date as first of month
-      const selectedDate = new Date(year, month - 1, 1);
-      const today = new Date();
+      // 2) Create the employee record
+      const empResponse = await fetch("/employees", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userid,
+          salary: parseFloat(form.salary),
+          deptid: parseInt(form.deptid, 10),
+        }),
+      });
+      if (!empResponse.ok) throw new Error("Failed to create employee");
 
-      // validation: not before joining, not after today
-      if (selectedDate < doj) {
-        setError(`Selected period ${month}/${year} is before joining date ${doj.toLocaleDateString()}`);
-        setLoading(false);
-        return;
-      }
-      // end of selected month
-      const endOfMonth = new Date(year, month, 0);
-      if (endOfMonth > today) {
-        setError(`Selected period ${month}/${year} is in the future`);
-        setLoading(false);
-        return;
-      }
-
-      // 2) fetch leave count
-      const leaveRes = await fetch(
-        `http://localhost:8080/leaves/byUserAndMonthYear/count?userId=${selectedEmp}&month=${month}&year=${year}`
-      );
-      const count = leaveRes.status === 204 ? 0 : await leaveRes.json();
-      setLeaveCount(count);
-
-      // 3) compute net pay
-      const extraLeaves = Math.max(0, count - 3);
-      const deductionPercent = extraLeaves * 5;
-      const deductionAmount = (salary * deductionPercent) / 100;
-      const pay = salary - deductionAmount;
-      setNetPay(pay);
+      setMessage(`Employee successfully created with ID ${userid}`);
+      setForm({
+        name: "",
+        password: "",
+        gender: "Male",
+        email: "",
+        phone_no: "",
+        address: "",
+        date_of_join: "",
+        salary: "",
+        deptid: "",
+      });
     } catch (err) {
-      console.error(err);
-      setError("Calculation failed. Try again.");
+      setMessage(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="payroll-form-container2">
-      <div className="form-header">
-        <h1>Payroll Processing</h1>
-        {error && <p className="error-message">{error}</p>}
+    <form className="add-emp-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label>Name</label>
+        <input
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
       </div>
-
-      <form className="admin-form-body" onSubmit={handleCalculate}>
-        <label>
-          Employee:
-          <select
-            value={selectedEmp}
-            onChange={(e) => setSelectedEmp(e.target.value)}
-          >
-            <option value="">Select Employee</option>
-            {empList.map((emp) => {
-              const user = userList.find((u) => u.userid === emp.userid);
-              return (
-                <option key={emp.userid} value={emp.userid}>
-                  ID: {emp.userid} - {user?.name || "Unknown"}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-
-        <label>
-          Month:
-          <input
-            type="number"
-            min="1"
-            max="12"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
-          />
-        </label>
-
-        <label>
-          Year:
-          <input
-            type="number"
-            min="2000"
-            max={new Date().getFullYear()}
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          />
-        </label>
-
-        <button type="submit" disabled={loading} className="submit-btn2">
-          {loading ? "Calculating..." : "Calculate Pay"}
-        </button>
-      </form>
-
-      {baseSalary !== null && (
-        <div className="results">
-          <p>Base Salary: {baseSalary}</p>
-          <p>Approved Leaves: {leaveCount}</p>
-          <p>Net Pay: {netPay}</p>
-        </div>
-      )}
-    </div>
+      <div className="form-group">
+        <label>Password</label>
+        <input
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label>Gender</label>
+        <select
+          name="gender"
+          value={form.gender}
+          onChange={handleChange}
+        >
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label>Email</label>
+        <input
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label>Phone</label>
+        <input
+          name="phone_no"
+          value={form.phone_no}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label>Address</label>
+        <textarea
+          name="address"
+          value={form.address}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label>Date of Joining</label>
+        <input
+          name="date_of_join"
+          type="date"
+          value={form.date_of_join}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label>Salary</label>
+        <input
+          name="salary"
+          type="number"
+          step="0.01"
+          value={form.salary}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label>Department ID</label>
+        <input
+          name="deptid"
+          type="number"
+          value={form.deptid}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <button className="submit-button" type="submit" disabled={loading}>
+        {loading ? "Saving…" : "Add Employee"}
+      </button>
+      {message && <div className="form-message">{message}</div>}
+    </form>
   );
 };
 
