@@ -1,110 +1,141 @@
 import React, { useEffect, useState } from "react";
-import "./salarySlip.css"; // Page-specific styles
+import "./salarySlip.css";
 import EmployeeLayout from "../../components/EmployeeLayout";
 
+/**
+ * Displays an employee’s monthly salary slip.
+ * - pulls salary + leaves from the backend
+ * - deducts 10 % if approved leaves > 3
+ */
+const DisplaySalarySlips = ({ userId: incomingId }) => {
+  const userId = incomingId ?? localStorage.getItem("employeeId");
 
-const DisplaySalarySlips = ({ userId }) => {
-  //const storedUserId = localStorage.getItem("userId");  // 🔥 Get stored userId
-  //userId = userId || storedUserId || 1; // Default to stored ID or 1
-  userId =localStorage.getItem("employeeId");;
+  const [salary,        setBaseSalary]    = useState(0);
+  const [approvedLeaves,setApprovedLeaves]= useState(0);
+  const [deduction,     setDeduction]     = useState(0);
+  const [totalSalary,   setTotalSalary]   = useState(0);
 
-  // const [userId, setUserId] = useState(0);
-  const [salary, setBaseSalary] = useState(0);
-  const [approvedLeaves,setApprovedLeaves] = useState(0);
-  const [deduction, setDeduction] = useState(0);
-  const [totalSalary, setTotalSalary] = useState(0);
-
+  /* ──────────────────────────────────────────────────────────── */
   useEffect(() => {
     if (!userId) {
       console.warn("No userId provided. Skipping API call.");
       return;
     }
 
-    const fetchSalarySlip = async () => {
+    (async () => {
       try {
-        const response = await fetch(`http://localhost:8080/employees/${userId}`);
-        if(!response.ok)
-          throw new Error("Employee not found\n");
+        /* salary */
+        const empRes = await fetch(`http://localhost:8080/employees/${userId}`);
+        if (!empRes.ok) throw new Error("Employee not found");
+        const emp = await empRes.json();
+        setBaseSalary(emp.salary);
 
-        // Print response status and headers
-        // console.log("Response Status:", response.status);
-        // console.log("Response Headers:", response.headers);
-        
+        /* approved leaves */
+        const leaveRes = await fetch(
+          `http://localhost:8080/leaves/approved?userId=${userId}`
+        );
+        if (!leaveRes.ok) throw new Error("Leaves data not found");
+        const leaves   = await leaveRes.json();
+        const leaveCnt = Array.isArray(leaves) ? leaves.length : 0;
+        setApprovedLeaves(leaveCnt);
 
-        const data = await response.json();
-        setBaseSalary(data.salary);
-        // console.log("salary Data:", data);
-        // console.log("salary Data:",data.salary );
-        //setUserId(data.userId);
-
-        // Fetch approved leaves
-        const leavesResponse = await fetch(`http://localhost:8080/leaves/approved?userId=${userId}`);
-        if (!leavesResponse.ok) 
-          throw new Error("Leaves data not found");
-
-        const leavesData = await leavesResponse.json();
-        //console.log("Leaves Data:", leavesData);
-        
-        const approvedLeaveCount = Array.isArray(leavesData) ? leavesData.length : 0;
-        setApprovedLeaves(approvedLeaveCount);
-        //console.log("leaves count Data:", approvedLeaveCount);
-        
-
-        // Calculate deductions
-        setDeduction((approvedLeaveCount > 3) ? (data.salary * 0.1) : 0);
-        //console.log("salaryDeduction Data:", deduction);
-
-        // Calculate total salary    
-        setTotalSalary(data.salary-((approvedLeaveCount > 3) ? (data.salary * 0.1) : 0));
-        // console.log("totalSalary Data:", totalSalary);
-        // console.log("totalSalary Data:", data.salary-((approvedLeaveCount > 3) ? (data.salary * 0.1) : 0));
-      } catch (error) { 
-        console.error("Error fetching salary slip:", error);  
+        /* deductions + total */
+        // const ded = leaveCnt > 3 ? emp.salary * 0.1 : 0;
+        const ded = leaveCnt > 3 ? leaveCnt-3 : 0;
+        const per  = ded * 0.05;
+        const amtDed = per * emp.salary;
+        emp.salary -= (per* emp.salary); 
+        // for (let i = 0; i < ded; i++) {
+        //   console.log("deducting");
+        //   emp.salary -= emp.salary * 0.05;
+        // }
+        setDeduction(amtDed);
+        setTotalSalary(emp.salary);
+      } catch (err) {
+        console.error("Error fetching salary slip:", err);
       }
-    };
-
-    fetchSalarySlip();
+    })();
   }, [userId]);
 
-
+  /* ──────────────────────────────────────────────────────────── */
   return (
     <EmployeeLayout>
-    <div className="salary-details">
-      <div className="receipt-header">
-        <h1>RECEIPT No.</h1>
-        <h2>020121</h2>
-      </div>
-      
-      <div className="receipt-body">
-        <div className="receipt-row">
-        {/* <p><strong>Date:</strong> <input type="text" value="14-03-2024" name="leaveDate"/></p> */}
-        <p><strong>Leaves:</strong><input type="text" value={approvedLeaves} readOnly/></p>
+      <div className="salary-details">
+        {/* ── receipt header ─────────────────────── */}
+        <header className="receipt-header">
+          <h1>RECEIPT No.</h1>
+          <h2>020121</h2>
+        </header>
 
-          <p><strong>Amount:</strong> ${totalSalary.toFixed(2)}</p>
-        </div>
-        <div className="receipt-row">
-          <p><strong>From:</strong> Rio.co</p>
-          <p><strong>Payment For:</strong> Monthly Salary</p>
-        </div>
-        <div className="receipt-row">
-          {/* <p><strong>Account:</strong><input type="text" value="031928176183 " readonly/> </p> */}
-          <p><strong>Generated On:</strong><input type="text" value={new Date().toISOString().split("T")[0]} readOnly /></p>
-        </div>
-        <div className="receipt-row">
-          <p><strong>Deductions:</strong> <input type="text" value={`$${deduction.toFixed(2)}`} readOnly /></p>
-          <p><strong>Tax Rate:</strong> 10%</p>
-        </div>
-        {/* <div className="receipt-row">
-          <p><strong>Leaves:</strong><input type="text" value="10" readonly/></p>
-          
-        </div> */}
-        <div className="receipt-row">
-          <h2 ><strong>Total</strong> ${totalSalary.toFixed(2)}</h2>
-        </div>
+        {/* ── body ───────────────────────────────── */}
+        <section className="receipt-body">
+          {/* Row 1 */}
+          <div className="receipt-row">
+            <div className="col">
+              <span className="label">Leaves:</span>
+              <span className="value">
+                <input value={approvedLeaves} readOnly />
+              </span>
+            </div>
+
+            {/* NOTE: ➜  add `col-right` */}
+            <div className="col col-right">
+              <span className="label">Salary:</span>
+              <span className="value">${salary.toFixed(2)}</span>
+            </div>
+          </div>
+
+          {/* Row 2 */}
+          <div className="receipt-row">
+            <div className="col">
+              <span className="label">From:</span>
+              <span className="value">Rio.co</span>
+            </div>
+
+            {/* NOTE: ➜  add `col-right` */}
+            <div className="col col-right">
+              <span className="label">Type:</span>
+              <span className="value">Monthly Salary</span>
+            </div>
+          </div>
+
+          {/* Row 3 (single-cell) */}
+          <div className="receipt-row">
+            <div className="col">
+              <span className="label">Generated On:</span>
+              <span className="value">
+                <input
+                  value={new Date().toISOString().split("T")[0]}
+                  readOnly
+                />
+              </span>
+            </div>
+            <div className="col" />   {/* placeholder keeps the grid */}
+          </div>
+
+          {/* Row 4 */}
+          <div className="receipt-row">
+            <div className="col">
+              <span className="label">Deductions:</span>
+              <span className="value">${deduction.toFixed(2)}</span>
+            </div>
+
+            {/* NOTE: ➜  add `col-right` */}
+            <div className="col col-right">
+              <span className="label">Tax Rate:</span>
+              <span className="value">5%</span>
+            </div>
+          </div>
+
+          {/* Total */}
+          <div className="receipt-row total-row">
+            <h2 className="total">
+              <strong>Total </strong>${totalSalary.toFixed(2)}
+            </h2>
+          </div>
+        </section>
       </div>
-    </div>
     </EmployeeLayout>
-  
   );
 };
 
