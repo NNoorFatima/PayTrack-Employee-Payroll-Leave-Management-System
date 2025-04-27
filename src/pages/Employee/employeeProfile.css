@@ -64,7 +64,7 @@
 }
 
 .content-section1 {
-  background: rgba(86, 86, 86, 0.3); /* Light frosted glass effect */
+  background: rgba(86, 86, 86, 0.2); /* Light frosted glass effect */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px; /*  Rounded corners */
