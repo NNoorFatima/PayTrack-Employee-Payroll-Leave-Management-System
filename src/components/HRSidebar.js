@@ -6,14 +6,14 @@ const HRSidebar = () => {
   const navigate = useNavigate(); // Initialize navigate function
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar" data-testid="hr-sidebar">
       <h2 className="nav-left">HR Panel</h2>
       <ul>
         {/* Clicking the button will navigate to the respective page */}
-        <li><button onClick={() => navigate("/payroll-processing")}>🏠 Payroll Processing</button></li>
-        <li><button onClick={() => navigate("/emp-removal")}>📝Employee Removal</button></li>
-        <li><button onClick={() => navigate("/leave-reports")}>💼 Leave Reports</button></li>
-        <li><button onClick={() => navigate("/add-emp")}>🧑 Add Employee</button></li>
+        <li><button data-testid="payroll-btn" onClick={() => navigate("/payroll-processing")}>🏠 Payroll Processing</button></li>
+        <li><button data-testid="emp-removal-btn" onClick={() => navigate("/emp-removal")}>📝Employee Removal</button></li>
+        <li><button data-testid="leave-reports-btn" onClick={() => navigate("/leave-reports")}>💼 Leave Reports</button></li>
+        <li><button data-testid="add-emp-btn" onClick={() => navigate("/add-emp")}>🧑 Add Employee</button></li>
         
 
         {/* Uncomment for Logout functionality if needed */}

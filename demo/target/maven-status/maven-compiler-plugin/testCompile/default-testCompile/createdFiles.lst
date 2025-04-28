@@ -1,1 +1,8 @@
+com\example\demo\service\HRServiceTest.class
 com\example\demo\DemoApplicationTests.class
+com\example\demo\controller\HRControllerTest.class
+com\example\demo\controller\AdminControllerTest.class
+com\example\demo\controller\UserControllerTest.class
+com\example\demo\service\AdminServiceTest.class
+com\example\demo\controller\LeaveControllerTest.class
+com\example\demo\service\UserServiceTest.class

@@ -7,23 +7,23 @@ const ManagerSidebar = ({ setView }) => {
   const navigate = useNavigate();
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar" data-testid="manager-sidebar">
       <h2 className="nav-left">Manager Panel</h2>    
       <ul>
         <li>
-          <button onClick={() => setView("home")}>🏠 Home</button>
+          <button data-testid="home-btn" onClick={() => setView("home")}>🏠 Home</button>
         </li>
         <li>
-          <button onClick={() => setView("leave-requests")}>📝 Leave Requests</button>
+          <button data-testid="leave-requests-btn" onClick={() => setView("leave-requests")}>📝 Leave Requests</button>
         </li>
         <li>
-        <button onClick={() => setView ("employees")}>💼 Employees</button>
+        <button data-testid="employees-btn" onClick={() => setView ("employees")}>💼 Employees</button>
         </li>
         <li>
-          <button onClick={() => setView("reports")}>📊 Reports</button>
+          <button data-testid="reports-btn" onClick={() => setView("reports")}>📊 Reports</button>
         </li>
         <li>
-          <button onClick={() => setView("profile")}>🧑 Profile</button>
+          <button data-testid="profile-btn" onClick={() => setView("profile")}>🧑 Profile</button>
         </li>
 
         

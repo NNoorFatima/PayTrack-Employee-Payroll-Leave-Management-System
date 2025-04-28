@@ -6,8 +6,8 @@ import backgroundImg from "../images/leavreq.jpeg";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-background" style={{ backgroundImage: `url(${backgroundImg})` }}></div>
+    <div className="dashboard-container" data-testid="dashboard-container">
+      <div className="dashboard-background" data-testid="dashboard-background" style={{ backgroundImage: `url(${backgroundImg})` }}></div>
       <div className="frosted-glass">
         <header className="top-nav">
           <div className="nav-left"></div>

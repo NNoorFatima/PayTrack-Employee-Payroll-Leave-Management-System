@@ -10,7 +10,7 @@ const ManagerLayout = ({ children, setView }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" data-testid="manager-layout">
       {/* Background Image */}
       <div
         className="dashboard-background"
@@ -31,6 +31,7 @@ const ManagerLayout = ({ children, setView }) => {
             <a
               href="#"
               className="nav-link logout-btn"
+              data-testid="manager-logout-btn"
               onClick={(e) => {
                 e.preventDefault();
                 navigate("/manager-login");
@@ -45,7 +46,7 @@ const ManagerLayout = ({ children, setView }) => {
         <div className="dashboard-content">
           {/* Pass the setView prop to ManagerSidebar */}
           <ManagerSidebar setView={setView} />
-          <main className="main-content">{children}</main>
+          <main className="main-content" data-testid="manager-content">{children}</main>
         </div>
       </div>
     </div>
