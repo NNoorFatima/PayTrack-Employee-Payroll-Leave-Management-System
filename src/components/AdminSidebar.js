@@ -6,7 +6,7 @@ const Sidebar = () => {
   const navigate = useNavigate(); // Initialize navigate function
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar" data-testid="admin-sidebar">
       <h2 className="nav-left">Admin Panel</h2>
       <ul>
         {/* Clicking the button will navigate to the respective page */}
